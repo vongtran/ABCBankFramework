@@ -22,6 +22,10 @@ public class BankFrm extends javax.swing.JFrame
     BankFrm myframe;
     private Object rowdata[];
     
+    public void setTableModel(DefaultTableModel model) {
+    	this.model = model;
+    }
+    
 	public BankFrm()
 	{
 		myframe = this;
