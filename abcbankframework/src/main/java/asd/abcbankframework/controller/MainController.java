@@ -4,23 +4,56 @@ import java.util.List;
 import java.util.Vector;
 
 import asd.abcbankframework.db.BankDB;
+import asd.abcbankframework.model.account.Checkings;
 import asd.abcbankframework.model.account.DefaultViewAccountModel;
 import asd.abcbankframework.model.account.Entry;
 import asd.abcbankframework.model.account.IAccount;
 import asd.abcbankframework.model.account.IDataModel;
 import asd.abcbankframework.model.account.IEntry;
+import asd.abcbankframework.model.account.Savings;
 import asd.abcbankframework.model.bank.Bank;
 import asd.abcbankframework.model.bank.IBank;
 import asd.abcbankframework.model.customer.ICustomer;
+import asd.abcbankframework.model.customer.Organization;
+import asd.abcbankframework.model.customer.Person;
 
 public class MainController {
 	private IDataModel dataModel = new DefaultViewAccountModel();
 	private BankDB bdb = BankDB.getInstance();
-	private IBank bank = BankDB.getInstance().getBank();
+	protected IBank bank = BankDB.getInstance().getBank();
 	
 	
-	public void addAccount(ICustomer customer) {
-	   bank.addCustomer(customer);
+	public void addAccount(String name, String street, String city
+			, String state, String zip, String email, String typeAccount
+			, String typeCustomer, String noOfemployee
+			) {
+	   
+		ICustomer cus;
+		//Create customer
+		if(typeCustomer=="person") {
+			cus=new Person();
+		}
+		else //company
+		{
+			cus=new Organization();
+			
+		}
+		cus.setName(name);
+		cus.setStreet(street);
+		cus.setCity(city);
+		cus.setState(state);
+		
+		
+		//Create acccount
+		IAccount account;		
+		if(typeAccount=="checking")
+		   account=new Checkings();
+		else //"saving"
+		   account=new Savings();
+		
+		cus.addAccount(account);
+		bank.addCustomer(cus);
+	
 	}
 	
 	public void deposit(String accoutnNumber, double amount) {
@@ -41,6 +74,8 @@ public class MainController {
 	
 		
 	}
+	
+	
 	
 	public void withdraw(String accoutnNumber, double amount) {
 		

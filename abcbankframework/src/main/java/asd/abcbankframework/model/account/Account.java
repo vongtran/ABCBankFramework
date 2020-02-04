@@ -3,7 +3,7 @@ package asd.abcbankframework.model.account;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Account implements IAccount {
+public abstract class Account implements IAccount {
 	private String accountNumber;
 	private List<IEntry> entries = new ArrayList<IEntry>();
 	
