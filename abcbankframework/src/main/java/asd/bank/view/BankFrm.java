@@ -4,6 +4,7 @@ import asd.abcbankframework.View.CenterPanelComponent;
 import asd.abcbankframework.View.MainView;
 import asd.abcbankframework.View.RightPanelComponent;
 import asd.abcbankframework.View.TopPanelComponent;
+import asd.abcbankframework.controller.MainController;
 
 import java.awt.*;
 import javax.swing.table.DefaultTableModel;
@@ -131,8 +132,8 @@ public class BankFrm extends MainView
 			RightPanelComponent rightPanelComponent = new RightPanelComponent();
 			rightPanelComponent.setBounds(468,104,96,100);
 			rightPanelComponent.setLayout(new GridLayout(3, 1));
-
-			CenterPanelComponent centerPanelComponent = new CenterPanelComponent();
+			MainController  controller = new MainController();
+			CenterPanelComponent centerPanelComponent = new CenterPanelComponent(controller.getDataVector(), controller.getColumnIdentifiers());
 			(new BankFrm(headerButtonComponent,centerPanelComponent,rightPanelComponent)).setVisible(true);
 		} 
 		catch (Throwable t) {

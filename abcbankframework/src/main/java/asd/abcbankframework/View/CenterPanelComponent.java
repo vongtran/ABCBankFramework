@@ -6,17 +6,18 @@ import asd.bank.view.BankDataModel;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.Vector;
 
 public class CenterPanelComponent extends JPanel {
     private DefaultTableModel model;
     private JTable JTable1;
     private JScrollPane JScrollPane1;
     private Object[] rowData;
-    MainController controller = new MainController();
 
-    public CenterPanelComponent(){
+
+    public CenterPanelComponent(Vector<Vector<String>> data,Vector<String> column){
         JScrollPane1 = new JScrollPane();
-        model = new BankDataModel(controller.getDataVector(), controller.getColumnIdentifiers());
+        model = new BankDataModel(data, column);
         JTable1 = new JTable(model);
         add(JScrollPane1);
         JScrollPane1.getViewport().add(JTable1);
