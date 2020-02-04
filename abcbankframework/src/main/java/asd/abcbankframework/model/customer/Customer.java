@@ -13,6 +13,19 @@ public class Customer implements ICustomer {
 	private String state;
 	private String zip;
 	private List<IAccount> accounts = new ArrayList<IAccount>();
+	public Customer() {
+		
+	}
+	
+	public Customer(String name, String street, String city, String state, String zip) {
+		super();
+		this.name = name;
+		this.street = street;
+		this.city = city;
+		this.state = state;
+		this.zip = zip;
+	}
+
 	public String getName() {
 		return name;
 	}

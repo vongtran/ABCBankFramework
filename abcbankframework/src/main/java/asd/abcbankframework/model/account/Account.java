@@ -6,6 +6,15 @@ import java.util.List;
 public class Account implements IAccount {
 	private String accountNumber;
 	private List<IEntry> entries = new ArrayList<IEntry>();
+	
+	public Account() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Account(String accountNumber) {
+		super();
+		this.accountNumber = accountNumber;
+	}
 	public String getAccountNumber() {
 		return accountNumber;
 	}

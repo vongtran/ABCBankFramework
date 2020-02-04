@@ -1,9 +1,21 @@
 package asd.abcbankframework.model.account;
 
-public class Entry {
+public class Entry implements IEntry {
 	private double ammount;
 	private String date;
 	private String name;
+	
+	public Entry() {
+		super();
+	}
+	
+	public Entry(double ammount, String date, String name) {
+		super();
+		this.ammount = ammount;
+		this.date = date;
+		this.name = name;
+	}
+
 	public double getAmmount() {
 		return ammount;
 	}
