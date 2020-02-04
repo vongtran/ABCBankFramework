@@ -1,5 +1,6 @@
 package asd.abcbankframework.View;
 
+import asd.abcbankframework.controller.MainController;
 import asd.bank.view.BankFrm;
 import asd.bank.view.JDialog_AddPAcc;
 
@@ -11,6 +12,7 @@ public class MainView extends JFrame {
     private CenterPanelComponent centerPanelComponent;
     private  RightPanelComponent rightPanelComponent;
     private  TopPanelComponent topPanelComponent;
+
     private JScrollPane JScrollPane1;
 
 

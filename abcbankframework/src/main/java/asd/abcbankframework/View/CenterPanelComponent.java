@@ -1,5 +1,8 @@
 package asd.abcbankframework.View;
 
+import asd.abcbankframework.controller.MainController;
+import asd.bank.view.BankDataModel;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -9,18 +12,12 @@ public class CenterPanelComponent extends JPanel {
     private JTable JTable1;
     private JScrollPane JScrollPane1;
     private Object[] rowData;
+    MainController controller = new MainController();
 
     public CenterPanelComponent(){
         JScrollPane1 = new JScrollPane();
-        model = new DefaultTableModel();
+        model = new BankDataModel(controller.getDataVector(), controller.getColumnIdentifiers());
         JTable1 = new JTable(model);
-        model.addColumn("AccountNr");
-        model.addColumn("Name");
-        model.addColumn("City");
-        model.addColumn("P/C");
-        model.addColumn("Ch/S");
-        model.addColumn("Amount");
-        rowData = new Object[8];
         add(JScrollPane1);
         JScrollPane1.getViewport().add(JTable1);
     }
