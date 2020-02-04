@@ -1,6 +1,16 @@
 package asd.abcbankframework.controller;
 
+import java.util.List;
+import java.util.Vector;
+
+import asd.abcbankframework.db.BankDB;
+import asd.abcbankframework.model.account.DefaultViewAccountModel;
+import asd.abcbankframework.model.account.IDataModel;
+import asd.abcbankframework.model.customer.ICustomer;
+
 public class MainController {
+	private IDataModel dataModel = new DefaultViewAccountModel();
+	private BankDB bdb = BankDB.getInstance();
 	public void addAccount() {
 		
 	}
@@ -16,4 +26,26 @@ public class MainController {
 	public void updateUI() {
 		
 	}
+	
+	public Vector<String> getColumnIdentifiers() {
+		return dataModel.getColumnIdentifiers();
+	}
+	
+	public Vector<Vector<String>> getDataVector() {
+		List<ICustomer> customers = bdb.getBank().getCustomers();
+		System.out.println("bank name: " + bdb.getBank().getName());
+		System.out.println("customers total: " + bdb.getBank().getCustomers().size());
+		return dataModel.getDataVector(customers, dataModel.defaultAccountFuntion());
+	}
+
+	public IDataModel getDataModel() {
+		return dataModel;
+	}
+
+	public void setDataModel(IDataModel dataModel) {
+		this.dataModel = dataModel;
+	}
+	
+	
+	
 }
