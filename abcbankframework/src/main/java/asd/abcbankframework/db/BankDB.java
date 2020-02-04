@@ -18,6 +18,8 @@ public class BankDB {
 	private BankDB() {
 		bank = new Bank();
 		bank.setName("MIU Bank");
+		
+		
 		ICustomer c1 = new Person("Van Vong Tran", "1000N 4th Street", "FairField", "IOWA", "52557", "10/10/1990");
 		IAccount ac1 = new Checkings("111");
 		
