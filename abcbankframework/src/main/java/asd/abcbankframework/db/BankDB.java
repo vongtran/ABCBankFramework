@@ -37,7 +37,7 @@ public class BankDB {
 		bank.addCustomer(c2);
 		
 		ICustomer c3 = new Person("Thanh Dat Nguyen", "1000N 4th Street", "FairField", "IOWA", "52557", "10/10/1990");
-		IAccount ac3 = new Account("113");
+		IAccount ac3 = new Savings("113");
 		
 		IEntry entry3 = new Entry(10.0, "01/01/2020", "First");
 		ac3.addEntry(entry3);
@@ -45,7 +45,7 @@ public class BankDB {
 		bank.addCustomer(c3);
 		
 		ICustomer c4 = new Organization("ABC Inc", "1000N 4th Street", "FairField", "IOWA", "52557", 100L);
-		IAccount ac4 = new Account("222");
+		IAccount ac4 = new Checkings("222");
 		
 		IEntry entry4 = new Entry(10.0, "01/01/2020", "First");
 		ac4.addEntry(entry4);
