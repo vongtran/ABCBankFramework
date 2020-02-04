@@ -4,6 +4,7 @@ import asd.abcbankframework.View.CenterPanelComponent;
 import asd.abcbankframework.View.MainView;
 import asd.abcbankframework.View.RightPanelComponent;
 import asd.abcbankframework.View.TopPanelComponent;
+import asd.abcbankframework.controller.MainController;
 import asd.bank.view.BankFrm;
 
 import javax.swing.*;
@@ -28,7 +29,8 @@ public class App {
                 //Create a new instance of our application's frame, and make it visible.
                 TopPanelComponent topPanelComponent = new TopPanelComponent();
                 RightPanelComponent rightPanelComponent = new RightPanelComponent();
-                CenterPanelComponent centerPanelComponent = new CenterPanelComponent();
+                MainController  controller = new MainController();
+                CenterPanelComponent centerPanelComponent = new CenterPanelComponent(controller.getDataVector(), controller.getColumnIdentifiers());
                 (new MainView(centerPanelComponent, rightPanelComponent, topPanelComponent)).setVisible(true);
             } catch (Throwable t) {
                 t.printStackTrace();

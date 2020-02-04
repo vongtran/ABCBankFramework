@@ -44,11 +44,19 @@ public class BankDB {
 		
 		ICustomer c4 = new Organization("ABC Inc", "1000N 4th Street", "FairField", "IOWA", "52557", 100L);
 		IAccount ac4 = new Account("222");
-		
+
 		IEntry entry4 = new Entry(10.0, "01/01/2020", "First");
 		ac4.addEntry(entry4);
 		c4.addAccount(ac4);
 		bank.addCustomer(c4);
+
+		ICustomer c5 = new Organization("ABC Inc", "1000N 4th Street", "FairField", "IOWA", "52557", 100L);
+		IAccount ac5 = new Account("222");
+
+		IEntry entry5 = new Entry(10.0, "01/01/2020", "First");
+		ac5.addEntry(entry5);
+		c5.addAccount(ac5);
+		bank.addCustomer(c5);
 	}
 	public static BankDB getInstance() {
 		return instance;

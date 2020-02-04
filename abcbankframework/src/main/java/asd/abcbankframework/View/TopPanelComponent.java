@@ -11,8 +11,8 @@ public class TopPanelComponent extends JPanel {
     javax.swing.JButton JButton_CompAC = new javax.swing.JButton();
 
     public TopPanelComponent(){
-        JButton_PerAC.setText("Default");
-        JButton_CompAC.setText("Default");
+        JButton_PerAC.setText("Add Account");
+        JButton_CompAC.setText("Add Company Account");
         setLayout(new FlowLayout(FlowLayout.LEFT));
         add(JButton_CompAC);
         add(JButton_PerAC);
@@ -41,5 +41,7 @@ public class TopPanelComponent extends JPanel {
     public void addNewButton(JButton button){
         add(button);
     }
+
+
 
 }

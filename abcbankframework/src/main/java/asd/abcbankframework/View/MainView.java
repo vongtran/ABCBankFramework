@@ -1,19 +1,26 @@
 package asd.abcbankframework.View;
 
+import asd.abcbankframework.DialogFactory.ActionDialog;
+import asd.abcbankframework.DialogFactory.DialogFactory;
+import asd.abcbankframework.DialogFactory.SimpleFactory;
 import asd.abcbankframework.controller.MainController;
+import asd.bank.view.BankDataModel;
 import asd.bank.view.BankFrm;
 import asd.bank.view.JDialog_AddPAcc;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class MainView extends JFrame {
 
     private CenterPanelComponent centerPanelComponent;
     private  RightPanelComponent rightPanelComponent;
-    private  TopPanelComponent topPanelComponent;
-
+    public   TopPanelComponent topPanelComponent;
     private JScrollPane JScrollPane1;
+    private JTable JTable1;
+    private DefaultTableModel model;
 
 
     public MainView(CenterPanelComponent centerComponent, RightPanelComponent rightComponent, TopPanelComponent topComponent){
@@ -26,19 +33,24 @@ public class MainView extends JFrame {
         setSize(575,310);
         setVisible(false);
         SymAction lSymAction = new SymAction();
-        SymAction1 lSymAction1 = new SymAction1();
+        Deposit deposit = new Deposit();
+        Withdraw withdraw = new Withdraw();
         this.topPanelComponent.setJButton_CompACAction(lSymAction);
-
+        this.topPanelComponent.setJButton_PerACAction(lSymAction);
         add(this.topPanelComponent,BorderLayout.NORTH);
-        //this.topPanelComponent.setLocation(10,20);
+        this.topPanelComponent.setBounds(24,20,350,33);
+        this.topPanelComponent.setLayout(new GridLayout(1, 2));
 
         add(this.rightPanelComponent,BorderLayout.EAST);
-        this.rightPanelComponent.setJButton_DepositAction(lSymAction1);
-        //this.topPanelComponent.setLocation(400,20);
-
+        this.rightPanelComponent.setBounds(468,104,96,100);
+        this.rightPanelComponent.setLayout(new GridLayout(3, 1));
+        this.rightPanelComponent.setJButton_DepositAction(deposit);
+        this.rightPanelComponent.setJButton_WithdrawAction(withdraw);
         add(this.centerPanelComponent,BorderLayout.WEST);
 
     }
+
+
     class SymAction implements java.awt.event.ActionListener
     {
         public void actionPerformed(java.awt.event.ActionEvent event)
@@ -50,40 +62,39 @@ public class MainView extends JFrame {
 
     void JButtonPerAC_actionPerformed(java.awt.event.ActionEvent event)
     {
-		/*
-		 JDialog_AddPAcc type object is for adding personal information
-		 construct a JDialog_AddPAcc type object
-		 set the boundaries and show it
-		*/
 
-        JDialog_AddAccount pac = new JDialog_AddAccount(this);
-        pac.setBounds(450, 20, 300, 330);
-        pac.show();
+        DialogFactory actionDialog = SimpleFactory.createDialog(this,"form");
+        actionDialog.show();
     }
 
-    class SymAction1 implements java.awt.event.ActionListener
+    class Deposit implements java.awt.event.ActionListener
     {
         public void actionPerformed(java.awt.event.ActionEvent event)
         {
-            JButtonPerAC_actionPerformed1(event);
+            deposit(event);
 
         }
     }
 
-    void JButtonPerAC_actionPerformed1(java.awt.event.ActionEvent event)
+    void deposit(java.awt.event.ActionEvent event)
     {
-		/*
-		 JDialog_AddPAcc type object is for adding personal information
-		 construct a JDialog_AddPAcc type object
-		 set the boundaries and show it
-		*/
+        DialogFactory actionDialog = SimpleFactory.createDialog(this,"action");
+        actionDialog.show();
+    }
 
-        JDialog_Action pac = new JDialog_Action(this);
-        pac.show();
+    class Withdraw implements java.awt.event.ActionListener
+    {
+        public void actionPerformed(java.awt.event.ActionEvent event)
+        {
+            deposit(event);
 
+        }
+    }
 
-
-
+    void Withdraw(java.awt.event.ActionEvent event)
+    {
+        DialogFactory actionDialog = SimpleFactory.createDialog(this,"action");
+        actionDialog.show();
     }
 
 }
