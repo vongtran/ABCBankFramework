@@ -13,7 +13,7 @@ public interface IBank {
 	
 	public List<IAccount> getAllAccounts();
 	
-	public List<IAccount> searchAccount(Predicate predicate)
+	public List<IAccount> searchAccount(Predicate predicate);
 	
 	public IAccount searchAccount(String number);
 	
