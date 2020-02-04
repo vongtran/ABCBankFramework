@@ -11,4 +11,8 @@ public class Checkings extends Account{
 		super(accountNumber);
 	}
 	
+	public void addInterest(double amount) {
+		this.interest_rate=amount;
+	}
+	
 }

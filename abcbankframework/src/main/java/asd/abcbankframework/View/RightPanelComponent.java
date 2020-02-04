@@ -34,6 +34,8 @@ public class RightPanelComponent extends JPanel {
 
     public void setJButton_DepositAction(ActionListener action) {
         this.JButton_Deposit.addActionListener(action);
+        
+      
     }
 
 
