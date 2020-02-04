@@ -13,9 +13,12 @@ import asd.abcbankframework.model.account.IEntry;
 import asd.abcbankframework.model.account.Savings;
 import asd.abcbankframework.model.bank.Bank;
 import asd.abcbankframework.model.bank.IBank;
+import asd.abcbankframework.model.customer.Customer;
 import asd.abcbankframework.model.customer.ICustomer;
 import asd.abcbankframework.model.customer.Organization;
 import asd.abcbankframework.model.customer.Person;
+import asd.abcbankframework.observer.ConcreteSubject;
+import asd.abcbankframework.observer.IObserver;
 
 public class MainController {
 	private IDataModel dataModel = new DefaultViewAccountModel();
@@ -93,6 +96,13 @@ public class MainController {
 	}
 	
 	public void updateUI() {
+		
+	}
+	
+	public void notifies() {
+		ConcreteSubject con=new ConcreteSubject();
+		IObserver cus=new Customer();
+		
 		
 	}
 	

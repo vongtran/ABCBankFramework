@@ -7,7 +7,7 @@ import asd.abcbankframework.model.account.IAccount;
 public interface ICustomer {
 	public void addAccount(IAccount account);
 	public void removeAccount(IAccount account);
-	public void sendEmail();
+	public void sendEmail(String message);
 	
 	public String getName();
 	public void setName(String name);
