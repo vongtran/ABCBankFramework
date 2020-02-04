@@ -1,15 +1,18 @@
 package asd.bank.view;
 
+import asd.abcbankframework.View.CenterPanelComponent;
+import asd.abcbankframework.View.MainView;
+import asd.abcbankframework.View.RightPanelComponent;
+import asd.abcbankframework.View.TopPanelComponent;
+
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.WindowEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.*;
 
 /**
  * A basic JFC based application.
  **/
-public class BankFrm extends javax.swing.JFrame
+public class BankFrm extends MainView
 {
     /****
      * init variables in the object
@@ -26,61 +29,63 @@ public class BankFrm extends javax.swing.JFrame
     	this.model = model;
     }
     
-	public BankFrm()
+	public BankFrm( TopPanelComponent topPanelComponent,CenterPanelComponent centerPanelComponent,RightPanelComponent rightPanelComponent)
 	{
-		myframe = this;
-
-		setTitle("Bank Application.");
-		setDefaultCloseOperation(javax.swing.JFrame.DO_NOTHING_ON_CLOSE);
-		getContentPane().setLayout(new BorderLayout(0,0));
-		setSize(575,310);
-		setVisible(false);
-		JPanel1.setLayout(null);
-		getContentPane().add(BorderLayout.CENTER, JPanel1);
-		JPanel1.setBounds(0,0,570,310);
+		super(centerPanelComponent,rightPanelComponent,topPanelComponent);
+//		myframe = this;
+//
+//		setTitle("Bank Application.");
+//		setDefaultCloseOperation(javax.swing.JFrame.DO_NOTHING_ON_CLOSE);
+//		getContentPane().setLayout(new BorderLayout(0,0));
+//		setSize(575,310);
+//		setVisible(false);
+//		JPanel1.setLayout(null);
+//		getContentPane().add(BorderLayout.CENTER, JPanel1);
+//		JPanel1.setBounds(0,0,570,310);
 		/*
 		/Add five buttons on the pane 
 		/for Adding personal account, Adding company account
 		/Deposit, Withdraw and Exit from the system
 		*/
-        JScrollPane1 = new JScrollPane();
-        model = new DefaultTableModel();
-        JTable1 = new JTable(model);
-        model.addColumn("AccountNr");
-        model.addColumn("Name");
-        model.addColumn("City");
-        model.addColumn("P/C");
-        model.addColumn("Ch/S");
-        model.addColumn("Amount");
-        rowdata = new Object[8];
-        newaccount=false;
-        
-        
-        JPanel1.add(JScrollPane1);
-        JScrollPane1.setBounds(12,92,444,160);
-        JScrollPane1.getViewport().add(JTable1);
-        JTable1.setBounds(0, 0, 420, 0);
+
+//        JScrollPane1 = new JScrollPane();
+//        model = new DefaultTableModel();
+//        JTable1 = new JTable(model);
+//        model.addColumn("AccountNr");
+//        model.addColumn("Name");
+//        model.addColumn("City");
+//        model.addColumn("P/C");
+//        model.addColumn("Ch/S");
+//        model.addColumn("Amount");
+//        rowdata = new Object[8];
+//        newaccount=false;
+//
+//
+//        JPanel1.add(JScrollPane1);
+//        JScrollPane1.setBounds(12,92,444,160);
+//        JScrollPane1.getViewport().add(JTable1);
+//        JTable1.setBounds(0, 0, 420, 0);
 //        rowdata = new Object[8];
 		
-		JButton_PerAC.setText("Add personal account");
-		JPanel1.add(JButton_PerAC);
-		JButton_PerAC.setBounds(24,20,192,33);
-		JButton_CompAC.setText("Add company account");
-		JButton_CompAC.setActionCommand("jbutton");
-		JPanel1.add(JButton_CompAC);
-		JButton_CompAC.setBounds(240,20,190,33);
-		JButton_Deposit.setText("Deposit");
-		JPanel1.add(JButton_Deposit);
-		JButton_Deposit.setBounds(468,104,96,33);
-		JButton_Withdraw.setText("Withdraw");
-		JPanel1.add(JButton_Withdraw);
-		JButton_Addinterest.setBounds(448,20,106,33);
-		JButton_Addinterest.setText("Add interest");
-		JPanel1.add(JButton_Addinterest);
-		JButton_Withdraw.setBounds(468,164,96,33);
-		JButton_Exit.setText("Exit");
-		JPanel1.add(JButton_Exit);
-		JButton_Exit.setBounds(468,248,96,31);
+//		JButton_PerAC.setText("Add personal account");
+//		JPanel1.add(JButton_PerAC);
+//		JButton_PerAC.setBounds(24,20,192,33);
+//		JButton_CompAC.setText("Add company account");
+//		JButton_CompAC.setActionCommand("jbutton");
+//		JPanel1.add(JButton_CompAC);
+//		JButton_CompAC.setBounds(240,20,190,33);
+//		JButton_Deposit.setText("Deposit");
+//		JPanel1.add(JButton_Deposit);
+//		JButton_Deposit.setBounds(468,104,96,33);
+//		JButton_Withdraw.setText("Withdraw");
+//		JPanel1.add(JButton_Withdraw);
+//		JButton_Addinterest.setBounds(448,20,106,33);
+//		JButton_Addinterest.setText("Add interest");
+//		JPanel1.add(JButton_Addinterest);
+//		JButton_Withdraw.setBounds(468,164,96,33);
+//		JButton_Exit.setText("Exit");
+//		JPanel1.add(JButton_Exit);
+//		JButton_Exit.setBounds(468,248,96,31);
 		// lineBorder1.setRoundedCorners(true);
 		// lineBorder1.setLineColor(java.awt.Color.green);
 		//$$ lineBorder1.move(24,312);
@@ -116,9 +121,19 @@ public class BankFrm extends javax.swing.JFrame
 		    } 
 		    catch (Exception e) { 
 		    }
-		    
-			//Create a new instance of our application's frame, and make it visible.
-			(new BankFrm()).setVisible(true);
+
+			TopPanelComponent headerButtonComponent = new OwnHeaderComponent();
+			headerButtonComponent.setJButton_CompACTittle("Add Company Account");
+			headerButtonComponent.setJButton_PerACTittle("Add Personal Account");
+			headerButtonComponent.setBounds(24,20,350,33);
+			headerButtonComponent.setLayout(new GridLayout(1, 2));
+
+			RightPanelComponent rightPanelComponent = new RightPanelComponent();
+			rightPanelComponent.setBounds(468,104,96,100);
+			rightPanelComponent.setLayout(new GridLayout(3, 1));
+
+			CenterPanelComponent centerPanelComponent = new CenterPanelComponent();
+			(new BankFrm(headerButtonComponent,centerPanelComponent,rightPanelComponent)).setVisible(true);
 		} 
 		catch (Throwable t) {
 			t.printStackTrace();
@@ -159,7 +174,7 @@ public class BankFrm extends javax.swing.JFrame
 	void BankFrm_windowClosing(java.awt.event.WindowEvent event)
 	{
 		// to do: code goes here.
-			 
+
 		BankFrm_windowClosing_Interaction1(event);
 	}
 
