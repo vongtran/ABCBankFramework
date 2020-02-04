@@ -2,6 +2,7 @@ package asd.abcbankframework.DialogFactory.Body;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class ActionBody extends IDialogBody {
     javax.swing.JLabel JLabel1 = new javax.swing.JLabel();
@@ -11,7 +12,7 @@ public class ActionBody extends IDialogBody {
     javax.swing.JButton JButton_OK = new javax.swing.JButton();
     javax.swing.JButton JButton_Cancel = new javax.swing.JButton();
 
-    public ActionBody(){
+    public ActionBody(ActionListener OKAction,ActionListener CancelAction){
         setLayout(null);
         JLabel1.setText("Acc Nr");
         JLabel2.setText("Amount");
@@ -33,5 +34,17 @@ public class ActionBody extends IDialogBody {
         add(JTextField_Deposit);
         add(JButton_Cancel);
         add(JButton_OK);
+        JButton_OK.addActionListener(OKAction);
+        JButton_Cancel.addActionListener(CancelAction);
     }
+
+    public void setJButton_OKAction(ActionListener action) {
+        this.JButton_OK.addActionListener(action);
+    }
+
+
+    public void setJButton_Cancel(ActionListener action) {
+        this.JButton_Cancel.addActionListener(action);
+    }
+
 }

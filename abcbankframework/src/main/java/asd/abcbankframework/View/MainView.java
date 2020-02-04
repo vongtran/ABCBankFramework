@@ -1,12 +1,7 @@
 package asd.abcbankframework.View;
 
-import asd.abcbankframework.DialogFactory.ActionDialog;
 import asd.abcbankframework.DialogFactory.DialogFactory;
 import asd.abcbankframework.DialogFactory.SimpleFactory;
-import asd.abcbankframework.controller.MainController;
-import asd.bank.view.BankDataModel;
-import asd.bank.view.BankFrm;
-import asd.bank.view.JDialog_AddPAcc;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -63,7 +58,7 @@ public class MainView extends JFrame {
     void JButtonPerAC_actionPerformed(java.awt.event.ActionEvent event)
     {
 
-        DialogFactory actionDialog = SimpleFactory.createDialog(this,"form");
+        DialogFactory actionDialog = SimpleFactory.createDialog(this,"form",new OK(), new Cancel());
         actionDialog.show();
     }
 
@@ -78,7 +73,7 @@ public class MainView extends JFrame {
 
     void deposit(java.awt.event.ActionEvent event)
     {
-        DialogFactory actionDialog = SimpleFactory.createDialog(this,"action");
+        DialogFactory actionDialog = SimpleFactory.createDialog(this,"action",new OK(),new Cancel());
         actionDialog.show();
     }
 
@@ -86,15 +81,34 @@ public class MainView extends JFrame {
     {
         public void actionPerformed(java.awt.event.ActionEvent event)
         {
-            deposit(event);
+            withdraw(event);
 
         }
     }
 
-    void Withdraw(java.awt.event.ActionEvent event)
+    void withdraw(java.awt.event.ActionEvent event)
     {
-        DialogFactory actionDialog = SimpleFactory.createDialog(this,"action");
+        DialogFactory actionDialog = SimpleFactory.createDialog(this,"action",new OK(),new Cancel());
         actionDialog.show();
     }
+
+    class OK implements java.awt.event.ActionListener
+    {
+        public void actionPerformed(java.awt.event.ActionEvent event)
+        {
+            System.out.println("OK");
+
+        }
+    }
+
+    class Cancel implements java.awt.event.ActionListener
+    {
+        public void actionPerformed(java.awt.event.ActionEvent event)
+        {
+            System.out.println("Cancel");
+
+        }
+    }
+
 
 }
