@@ -3,8 +3,9 @@ package asd.abcbankframework.model.customer;
 import java.util.List;
 
 import asd.abcbankframework.model.account.IAccount;
+import asd.abcbankframework.observer.IObserver;
 
-public interface ICustomer {
+public interface ICustomer extends IObserver {
 	public void addAccount(IAccount account);
 	public void removeAccount(IAccount account);
 	public void sendEmail(String message);

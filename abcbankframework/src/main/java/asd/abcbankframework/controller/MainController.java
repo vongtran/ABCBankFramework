@@ -2,6 +2,7 @@ package asd.abcbankframework.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
@@ -39,9 +40,11 @@ public class MainController {
 			) {
 	   
 		ICustomer cus;
+	
 		//Create customer
 		if(typeCustomer=="person") {
 			cus=new Person();
+		
 		}
 		else //company
 		{
@@ -63,6 +66,9 @@ public class MainController {
 		
 		cus.addAccount(account);
 		bank.addCustomer(cus);
+				
+		//notifies		
+		 notifies(cus," Add account ");
 
 	}
 	
@@ -77,12 +83,15 @@ public class MainController {
 		IEntry entry=new Entry();
 		entry.setAmmount(amount);
 		entry.setDate("2020-02-23");
-		entry.setName("");
+		entry.setName("deposit");
 				
 		account.addEntry(entry);
 		
-	
 		
+		System.out.println(Arrays.toString(bank.getAllEntries().toArray()));
+	
+	    ICustomer cus= bank.getCustomerByAccount(accoutnNumber);
+		notifies(cus," deposit "+ amount);
 	}
 	
 	
@@ -100,17 +109,20 @@ public class MainController {
 		entry.setName("");
 				
 		account.addEntry(entry);
+		
+		
+		 ICustomer cus= bank.getCustomerByAccount(accoutnNumber);
+		 notifies(cus," Withdraw "+ amount);
 	}
 	
 	public void updateUI() {
 		
 	}
 	
-	public void notifies() {
+	public void notifies(IObserver cus, String message) {
 		ConcreteSubject con=new ConcreteSubject();
-		IObserver cus=new Customer();
-		
-		
+		con.Attach(cus);
+		con.notifies(message);
 	}
 	
 	public Vector<String> getColumnIdentifiers() {
