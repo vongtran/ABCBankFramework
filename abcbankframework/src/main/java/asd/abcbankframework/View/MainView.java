@@ -113,7 +113,7 @@ public class MainView extends JFrame {
         actionDialog.setBodyCancelAction(new Cancel());
         String selection = this.centerPanelComponent.getAccnr();
         actionDialog.setText(selection);
-        actionDialog.setBodyOKAction(new OK(actionDialog,selection));
+        actionDialog.setBodyOKAction(new OKDeposit(actionDialog,selection));
 
         actionDialog.show();
     }
@@ -132,18 +132,24 @@ public class MainView extends JFrame {
         ActionDialog actionDialog = new ActionDialog(this);
         String selection = this.centerPanelComponent.getAccnr();
         actionDialog.setText(selection);
-        actionDialog.setBodyCancelAction(new OK(actionDialog,selection));
+        actionDialog.setBodyOKAction(new OKWithdraw(actionDialog,selection));
         actionDialog.show();
     }
 
     class OKWithdraw implements java.awt.event.ActionListener
     {
+    	 ActionDialog value;
+         String Id;
+         public OKWithdraw(ActionDialog value,String id){
+             this.value = value;
+             this.Id = id;
+         }
         public void actionPerformed(java.awt.event.ActionEvent event)
         {
       
-            controller.withdraw("222", 123);
-           centerPanelComponent.setTableModel(new BankDataModel(controller.getDataVector(), controller.getColumnIdentifiers()));
-            
+            controller.withdraw(this.Id, Double.parseDouble(this.value.getAmount()));
+          // centerPanelComponent.setTableModel(new BankDataModel(controller.getDataVector(), controller.getColumnIdentifiers()));
+            refreshTable();
         }
     }
     
@@ -157,27 +163,29 @@ public class MainView extends JFrame {
         }
         public void actionPerformed(java.awt.event.ActionEvent event)
         {
-            System.out.println(this.value.getAmount());
-
-            controller.withdraw(this.Id,123);
-
+          
+            controller.withdraw(this.Id, Double.parseDouble(this.value.getAmount()));
+           
         }
     }
     
     
     class OKDeposit implements java.awt.event.ActionListener
     {
+    	ActionDialog value;
+        String Id;
+        public OKDeposit(ActionDialog value,String id){
+            this.value = value;
+            this.Id = id;
+        }
+        
         public void actionPerformed(java.awt.event.ActionEvent event)
         {
       
-            controller.deposit("222", 123);
+            controller.deposit(this.Id, Double.parseDouble(this.value.getAmount()));
        
-            
-           //refresh table
-           Vector<Vector<String>> data = controller.getDataVector();                       
-           model = new BankDataModel(data, controller.getColumnIdentifiers());
-           JTable1 = new JTable(model);
-           centerPanelComponent.refreshTable(JTable1);
+            refreshTable();
+          
         }
     }
 
@@ -187,8 +195,17 @@ public class MainView extends JFrame {
         public void actionPerformed(java.awt.event.ActionEvent event)
         {
             System.out.println("Cancel");
+            
 
         }
+    }
+    
+    private void refreshTable() {
+    	 //refresh table
+        Vector<Vector<String>> data = controller.getDataVector();                       
+        model = new BankDataModel(data, controller.getColumnIdentifiers());
+        JTable1 = new JTable(model);
+        centerPanelComponent.refreshTable(JTable1);
     }
 
 
