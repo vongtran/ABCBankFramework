@@ -37,6 +37,7 @@ public class MainController {
 	public void addAccount(String name, String street, String city
 			, String state, String zip, String email, String typeAccount
 			, String typeCustomer, String noOfemployee
+			, String accountNumber
 			) {
 	   
 		ICustomer cus;
@@ -59,10 +60,11 @@ public class MainController {
 		
 		//Create acccount
 		IAccount account;		
-		if(typeAccount=="checking")
+		if(typeAccount=="Ch")
 		   account=new Checkings();
 		else //"saving"
 		   account=new Savings();
+		account.setAccountNumber(accountNumber);
 		
 		cus.addAccount(account);
 		bank.addCustomer(cus);

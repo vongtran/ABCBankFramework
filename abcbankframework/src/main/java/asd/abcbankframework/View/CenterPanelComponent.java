@@ -28,11 +28,15 @@ public class CenterPanelComponent extends JPanel {
     }
 
     public int getSelection(){
+    
         return JTable1.getSelectionModel().getMinSelectionIndex();
     }
 
     public String getAccnr(){
-        return (String)model.getValueAt(this.getSelection(), 0);
+    	 if(this.getSelection()==-1)
+    	  return "NaN";
+         else
+         return (String)model.getValueAt(this.getSelection(), 0);
     }
 
     public void setRowData(Object[] rowData) {
@@ -44,6 +48,7 @@ public class CenterPanelComponent extends JPanel {
     }
     
     public void refreshTable(JTable JTable1) {
+    	 this.JTable1=JTable1;
     	 JScrollPane1.getViewport().removeAll();
     	 JScrollPane1.getViewport().add(JTable1);
     }

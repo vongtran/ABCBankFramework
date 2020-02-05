@@ -21,6 +21,8 @@ public class MainView extends JFrame {
     private JScrollPane JScrollPane1;
     private JTable JTable1;
     private DefaultTableModel model;
+    
+    private ActionDialog actionDialog;
 
     MainController controller;
 
@@ -28,7 +30,7 @@ public class MainView extends JFrame {
         this.topPanelComponent = topComponent;
         this.rightPanelComponent = rightComponent;
         this.centerPanelComponent = centerComponent;
-        setTitle("Bank Application.");
+        setTitle("Frame work");
         setDefaultCloseOperation(javax.swing.JFrame.DO_NOTHING_ON_CLOSE);
         getContentPane().setLayout(new BorderLayout(0,0));
         setSize(575,310);
@@ -47,6 +49,7 @@ public class MainView extends JFrame {
         this.rightPanelComponent.setLayout(new GridLayout(3, 1));
         this.rightPanelComponent.setJButton_DepositAction(deposit);
         this.rightPanelComponent.setJButton_WithdrawAction(withdraw);
+        this.rightPanelComponent.setJButton_ExitAction(new Exit());
         add(this.centerPanelComponent,BorderLayout.WEST);
         
         
@@ -84,9 +87,29 @@ public class MainView extends JFrame {
             formDialog.actionOk();
             System.out.println(formDialog.getAccountType());
             System.out.println(formDialog.getClientName());
+            
+            controller.addAccount(formDialog.getClientName(), formDialog.getStreet(), formDialog.getCity()
+            		, formDialog.getState(), formDialog.getZip(), formDialog.getName(), formDialog.getAccountType()
+            		, "personal", "20"
+            		, formDialog.getAccountnr());
+            
+            centerPanelComponent.setTableModel(new BankDataModel(controller.getDataVector(), controller.getColumnIdentifiers()));
+        
+            refreshTable();
+        
+        }
+    } 
+    class Exit implements java.awt.event.ActionListener
+    {
+        public void actionPerformed(java.awt.event.ActionEvent event)
+        {
+            dispose();
+
         }
     }
-
+    
+    
+    
     class CancelCreateAccountPer implements java.awt.event.ActionListener
     {
         public void actionPerformed(java.awt.event.ActionEvent event)
@@ -110,9 +133,15 @@ public class MainView extends JFrame {
 
     void deposit(java.awt.event.ActionEvent event)
     {
-        ActionDialog actionDialog = new ActionDialog(this);
+        actionDialog = new ActionDialog(this);
         actionDialog.setBodyCancelAction(new Cancel());
         String selection = this.centerPanelComponent.getAccnr();
+        if(selection=="NaN")
+        {
+          System.out.println("Please select one account");
+          return;
+        }
+        
         actionDialog.setText(selection);
         actionDialog.setBodyOKAction(new OKDeposit(actionDialog,selection));
 
@@ -130,11 +159,19 @@ public class MainView extends JFrame {
 
     void withdraw(java.awt.event.ActionEvent event)
     {
-        ActionDialog actionDialog = new ActionDialog(this);
+        actionDialog = new ActionDialog(this);
         String selection = this.centerPanelComponent.getAccnr();
+        if(selection=="NaN")
+        {
+          System.out.println("Please select one account");
+          return;
+        }
         actionDialog.setText(selection);
         actionDialog.setBodyOKAction(new OKWithdraw(actionDialog,selection));
+        actionDialog.setBodyCancelAction(new Cancel());
         actionDialog.show();
+        
+       
     }
 
     class OKWithdraw implements java.awt.event.ActionListener
@@ -149,7 +186,8 @@ public class MainView extends JFrame {
         {
       
             controller.withdraw(this.Id, Double.parseDouble(this.value.getAmount()));
-          // centerPanelComponent.setTableModel(new BankDataModel(controller.getDataVector(), controller.getColumnIdentifiers()));
+            actionDialog.dispose();
+            centerPanelComponent.setTableModel(new BankDataModel(controller.getDataVector(), controller.getColumnIdentifiers()));
             refreshTable();
         }
     }
@@ -164,16 +202,10 @@ public class MainView extends JFrame {
         }
         public void actionPerformed(java.awt.event.ActionEvent event)
         {
-<<<<<<< HEAD
-          
-            controller.withdraw(this.Id, Double.parseDouble(this.value.getAmount()));
-           
-=======
             System.out.println(this.value.getAmount());
 
             controller.withdraw(this.Id,Double.parseDouble(this.value.getAmount()));
 
->>>>>>> 06af3e212cfe0e8bdac5cc206bb1aefd7f15b550
         }
     }
     
@@ -191,7 +223,7 @@ public class MainView extends JFrame {
         {
       
             controller.deposit(this.Id, Double.parseDouble(this.value.getAmount()));
-       
+            actionDialog.dispose();
             refreshTable();
           
         }
@@ -202,8 +234,8 @@ public class MainView extends JFrame {
 
         public void actionPerformed(java.awt.event.ActionEvent event)
         {
-            System.out.println("Cancel");
-            
+            System.out.println("Cancel 123");
+            actionDialog.dispose();
 
         }
     }
