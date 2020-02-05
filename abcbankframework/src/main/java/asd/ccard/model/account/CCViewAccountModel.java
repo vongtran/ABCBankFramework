@@ -34,6 +34,7 @@ public class CCViewAccountModel implements IDataModel{
 	public void setColumnIdentifiers(Vector<String> columnIdentifiers) {
 		this.columnIdentifiers = columnIdentifiers;
 	}
+	
 	public Vector<Vector<String>> getDataVector(List<ICustomer> customers, Function<List<ICustomer>, Vector<Vector<String>>> f) {
 		return f.apply(customers);
 	}

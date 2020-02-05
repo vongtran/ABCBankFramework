@@ -22,6 +22,7 @@ public class MainView extends JFrame {
     private JScrollPane JScrollPane1;
     private JTable JTable1;
     private DefaultTableModel model;
+    protected  Withdraw withdraw;
     
     private ActionDialog actionDialog;
 
@@ -39,7 +40,7 @@ public class MainView extends JFrame {
         PersonalAccount personalAccount = new PersonalAccount();
         CompanyAccount companyAccount = new CompanyAccount();
         Deposit deposit = new Deposit();
-        Withdraw withdraw = new Withdraw();
+        withdraw = new Withdraw();
 
         this.topPanelComponent.setJButton_CompACAction(companyAccount);
         this.topPanelComponent.setJButton_PerACAction(personalAccount);
@@ -51,7 +52,7 @@ public class MainView extends JFrame {
         this.rightPanelComponent.setBounds(468,104,96,100);
         this.rightPanelComponent.setLayout(new GridLayout(3, 1));
         this.rightPanelComponent.setJButton_DepositAction(deposit);
-        this.rightPanelComponent.setJButton_WithdrawAction(withdraw);
+       // this.rightPanelComponent.setJButton_WithdrawAction(withdraw);
         this.rightPanelComponent.setJButton_ExitAction(new Exit());
         add(this.centerPanelComponent,BorderLayout.WEST);
         

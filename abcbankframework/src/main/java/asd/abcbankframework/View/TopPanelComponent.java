@@ -6,8 +6,8 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class TopPanelComponent extends JPanel {
-    javax.swing.JButton JButton_PerAC = new javax.swing.JButton();
-    javax.swing.JButton JButton_CompAC = new javax.swing.JButton();
+    protected javax.swing.JButton JButton_PerAC = new javax.swing.JButton();
+    protected javax.swing.JButton JButton_CompAC = new javax.swing.JButton();
 
     public TopPanelComponent(){
         JButton_PerAC.setText("Add Account");

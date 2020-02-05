@@ -33,12 +33,13 @@ public class BankFrm extends MainView
     	this.model = model;
     }
     
-	public BankFrm(OwnHeaderComponent topPanelComponent,CenterPanelComponent centerPanelComponent,RightPanelComponent rightPanelComponent)
+	public BankFrm(OwnHeaderComponent topPanelComponent,CenterPanelComponent centerPanelComponent,BankRightPannelComponent rightPanelComponent)
 	{
 		super(centerPanelComponent,rightPanelComponent,topPanelComponent);
 		topPanelComponent.setJButton_AddInterest(new AddInterest());
 		bankController = new BankController();
-
+		setTitle("Bank");
+	    rightPanelComponent.setJButton_WithdrawAction(withdraw);
 	}
 	class AddInterest implements java.awt.event.ActionListener
 	{
@@ -93,7 +94,7 @@ public class BankFrm extends MainView
 			headerButtonComponent.setBounds(24,20,350,33);
 			headerButtonComponent.setLayout(new GridLayout(1, 2));
 
-			RightPanelComponent rightPanelComponent = new RightPanelComponent();
+			BankRightPannelComponent rightPanelComponent = new BankRightPannelComponent(); //new RightPanelComponent();
 			rightPanelComponent.setBounds(468,104,96,100);
 			rightPanelComponent.setLayout(new GridLayout(3, 1));
 			MainController  controller = new MainController();

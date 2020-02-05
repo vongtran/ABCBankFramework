@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import asd.abcbankframework.controller.MainController;
+import asd.abcbankframework.model.account.DefaultViewAccountModel;
 import asd.abcbankframework.model.account.IAccount;
+import asd.abcbankframework.model.account.IDataModel;
 import asd.abcbankframework.model.customer.ICustomer;
 import asd.ccard.model.account.CCAccount;
+import asd.ccard.model.account.CCViewAccountModel;
 
 public class CCController extends MainController {
 
+	private IDataModel dataModel = new CCViewAccountModel();
+	
 	@Override
 	public void addAccount(String name, String street, String city, String state, String zip, String email,
 			String typeAccount, String typeCustomer, String noOfemployee, String accountNumber) {

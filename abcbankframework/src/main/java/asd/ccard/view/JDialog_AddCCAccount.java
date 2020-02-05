@@ -194,8 +194,8 @@ public class JDialog_AddCCAccount extends javax.swing.JDialog
        parentframe.city=JTextField_CT.getText();
        parentframe.zip=JTextField_ZIP.getText();
        parentframe.state=JTextField_ST.getText();
-       parentframe.ccnumber=JTextField_CCNR.getText();
-       parentframe.expdate=JTextField_ExpDate.getText();
+       //parentframe.ccnumber=JTextField_CCNR.getText();
+      // parentframe.expdate=JTextField_ExpDate.getText();
        if (JRadioButton_Gold.isSelected())
            parentframe.accountType="Gold";
            else{
