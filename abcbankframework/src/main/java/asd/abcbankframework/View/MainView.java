@@ -78,7 +78,7 @@ public class MainView extends JFrame {
     {
 
         FormDialog formDialog  = new FormDialog(this,"P");
-        formDialog.setCancelAction(new CancelCreateAccountPer());
+        formDialog.setCancelAction(new CancelCreateAccountPer(formDialog));
         formDialog.setOKAction(new OKCreateAccountPer(formDialog));
         formDialog.show();
     }
@@ -87,7 +87,7 @@ public class MainView extends JFrame {
     {
 
         FormDialog formDialog  = new FormDialog(this,"C");
-        formDialog.setCancelAction(new CancelCreateAccountPer());
+        formDialog.setCancelAction(new CancelCreateAccountPer(formDialog));
         formDialog.setOKAction(new OKCreateAccountPer(formDialog));
         formDialog.show();
     }
@@ -109,11 +109,15 @@ public class MainView extends JFrame {
 
     class CancelCreateAccountPer implements java.awt.event.ActionListener
     {
+        FormDialog formDialog;
+        public CancelCreateAccountPer(FormDialog formDialog){
+            this.formDialog = formDialog;
+        }
         public void actionPerformed(java.awt.event.ActionEvent event)
         {
-            deposit(event);
-
+            formDialog.dispose();
         }
+
     }
 
 

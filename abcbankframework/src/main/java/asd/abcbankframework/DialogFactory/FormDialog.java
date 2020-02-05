@@ -124,4 +124,6 @@ public class FormDialog extends DialogFactory {
     public void setCancelAction(ActionListener action){
         body.setJButton_Cancel(action);
     }
+
+
 }

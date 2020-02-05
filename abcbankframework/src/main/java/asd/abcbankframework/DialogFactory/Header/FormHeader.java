@@ -3,6 +3,8 @@ package asd.abcbankframework.DialogFactory.Header;
 import asd.abcbankframework.DialogFactory.FormDialog;
 import asd.abcbankframework.model.account.Account;
 
+import javax.swing.*;
+
 public class FormHeader extends IDialogHeader {
     FormDialog formDialog;
     javax.swing.JRadioButton JRadioButton_Chk = new javax.swing.JRadioButton();
@@ -11,10 +13,15 @@ public class FormHeader extends IDialogHeader {
         this.formDialog = formDialog;
         JRadioButton_Chk.setText("Checkings");
         JRadioButton_Chk.setActionCommand("Checkings");
-        add(JRadioButton_Chk);
+
         JRadioButton_Chk.setBounds(36,12,84,24);
         JRadioButton_Sav.setText("Savings");
         JRadioButton_Sav.setActionCommand("Savings");
+        ButtonGroup bgroup = new ButtonGroup();
+        bgroup.add(JRadioButton_Chk);
+        bgroup.add(JRadioButton_Sav);
+        JRadioButton_Chk.setSelected(true);
+        add(JRadioButton_Chk);
         add(JRadioButton_Sav);
         JRadioButton_Sav.setBounds(36,36,84,24);
     }
