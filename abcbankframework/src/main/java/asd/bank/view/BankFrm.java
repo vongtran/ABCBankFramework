@@ -19,19 +19,10 @@ public class BankFrm extends MainView
     /****
      * init variables in the object
      ****/
-    String accountnr, clientName,street,city,zip,state,accountType,clientType,amountDeposit;
-    boolean newaccount;
-    private DefaultTableModel model;
-    private JTable JTable1;
-    private JScrollPane JScrollPane1;
-    BankFrm myframe;
-    private Object rowdata[];
+
 
     BankController bankController;
-    
-    public void setTableModel(DefaultTableModel model) {
-    	this.model = model;
-    }
+
     
 	public BankFrm(OwnHeaderComponent topPanelComponent,CenterPanelComponent centerPanelComponent,BankRightPannelComponent rightPanelComponent)
 	{
@@ -53,7 +44,7 @@ public class BankFrm extends MainView
 	void JButtonInterest_actionPerformed(java.awt.event.ActionEvent event)
 	{
 		InterestDialog interestDialog  = new InterestDialog(this);
-//		interestDialog.setBodyCancelAction(new MainView.CancelCreateAccountPer(formDialog));
+		interestDialog.setBodyCancelAction(new CancelCreateAccountPer(interestDialog));
 		interestDialog.setBodyOKAction(new OKCreateAccountPer(interestDialog));
 		interestDialog.show();
 	}
@@ -67,6 +58,19 @@ public class BankFrm extends MainView
 		{
 			bankController.addInterest(Double.parseDouble(interestDialog.getInterest()));
 			refreshTable();
+			interestDialog.dispose();
+		}
+	}
+
+	class CancelCreateAccountPer implements java.awt.event.ActionListener
+	{
+		InterestDialog interestDialog;
+		public CancelCreateAccountPer(InterestDialog interestDialog){
+			this.interestDialog = interestDialog;
+		}
+		public void actionPerformed(java.awt.event.ActionEvent event)
+		{
+			interestDialog.dispose();
 		}
 	}
 

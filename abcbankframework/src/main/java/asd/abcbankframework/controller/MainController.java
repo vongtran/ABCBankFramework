@@ -1,14 +1,9 @@
 package asd.abcbankframework.controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-import asd.abcbankframework.View.JDialog_AddAccount;
 import asd.abcbankframework.View.MainView;
 import asd.abcbankframework.db.BankDB;
 import asd.abcbankframework.model.account.Checkings;
@@ -18,9 +13,7 @@ import asd.abcbankframework.model.account.IAccount;
 import asd.abcbankframework.model.account.IDataModel;
 import asd.abcbankframework.model.account.IEntry;
 import asd.abcbankframework.model.account.Savings;
-import asd.abcbankframework.model.bank.Bank;
 import asd.abcbankframework.model.bank.IBank;
-import asd.abcbankframework.model.customer.Customer;
 import asd.abcbankframework.model.customer.ICustomer;
 import asd.abcbankframework.model.customer.Organization;
 import asd.abcbankframework.model.customer.Person;
