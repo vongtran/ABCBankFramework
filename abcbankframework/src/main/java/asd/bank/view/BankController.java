@@ -14,12 +14,14 @@ public class BankController extends MainController  {
 		List<IAccount> accounts = bank.getAllAccounts();
 		for (IAccount account : accounts) {
 			
-			  if (account instanceof Checkings)
+			  if (account instanceof Checkings){
 				  ((Checkings)account).addInterest(amount);
-			  
-			  if (account instanceof Savings)
+					System.out.println(((Checkings)account).getInterest_rate());
+			  }
+			  if (account instanceof Savings){
 				  ((Savings)account).addInterest(amount);
-			  
+			  		System.out.println(((Savings)account).getInterest_rate());
+			  }
 		}
 	
 	}

@@ -1,6 +1,5 @@
 package asd.abcbankframework.View;
 
-import asd.bank.view.JDialog_AddPAcc;
 
 import javax.swing.*;
 import java.awt.*;
