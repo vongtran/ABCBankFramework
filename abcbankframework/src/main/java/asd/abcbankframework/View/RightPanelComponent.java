@@ -45,6 +45,7 @@ public class RightPanelComponent extends JPanel {
 
     public void setJButton_ExitAction(ActionListener action) {
         this.JButton_Exit.addActionListener(action);
+       
     }
 
     public void addNewButton(JButton button){
