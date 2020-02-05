@@ -105,12 +105,11 @@ public class MainView extends JFrame {
         public void actionPerformed(java.awt.event.ActionEvent event)
         {
             formDialog.actionOk();
-            System.out.println(formDialog.getAccountType());
-            System.out.println(formDialog.getClientName());
+          
             
             controller.addAccount(formDialog.getClientName(), formDialog.getStreet(), formDialog.getCity()
             		, formDialog.getState(), formDialog.getZip(), formDialog.getName(), formDialog.getAccountType()
-            		, "personal", "20"
+            		, formDialog.getClientType(), "20"
             		, formDialog.getAccountnr());
             
             centerPanelComponent.setTableModel(new BankDataModel(controller.getDataVector(), controller.getColumnIdentifiers()));
@@ -223,9 +222,7 @@ public class MainView extends JFrame {
         public void actionPerformed(java.awt.event.ActionEvent event)
         {
 
-            System.out.println(this.value.getAmount());
-
-            controller.withdraw(this.Id,Double.parseDouble(this.value.getAmount()));
+             controller.withdraw(this.Id,Double.parseDouble(this.value.getAmount()));
 
         }
     }
@@ -255,7 +252,7 @@ public class MainView extends JFrame {
 
         public void actionPerformed(java.awt.event.ActionEvent event)
         {
-            System.out.println("Cancel 123");
+        
             actionDialog.dispose();
 
         }

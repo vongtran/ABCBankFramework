@@ -54,7 +54,7 @@ public class DefaultViewAccountModel implements IDataModel{
 					result.add(data);
 				}
 			}
-			System.out.println(Arrays.toString(result.toArray()));
+			
 			return result;
 		};
 		return accountTableFuction;

@@ -5,6 +5,8 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import asd.abcbankframework.View.JDialog_AddAccount;
 import asd.abcbankframework.View.MainView;
@@ -25,6 +27,7 @@ import asd.abcbankframework.model.customer.Person;
 import asd.abcbankframework.observer.ConcreteSubject;
 import asd.abcbankframework.observer.IObserver;
 
+
 public class MainController {
 	private IDataModel dataModel = new DefaultViewAccountModel();
 	private BankDB bdb = BankDB.getInstance();
@@ -33,19 +36,30 @@ public class MainController {
 
 	protected IBank bank = BankDB.getInstance().getBank();
 	
+
 	
 	public void addAccount(String name, String street, String city
 			, String state, String zip, String email, String typeAccount
 			, String typeCustomer, String noOfemployee
 			, String accountNumber
 			) {
+		
+		//Validation
+		
+		List<IAccount> accounts = bank.getAllAccounts().stream().filter(x->x.getAccountNumber().equals(accountNumber)).collect(Collectors.toList());
+		if(accounts.size()>0)
+		{
+			System.out.println("This account exist");
+			return;
+		}
+		
+		
 	   
 		ICustomer cus;
 	
 		//Create customer
-		if(typeCustomer=="person") {
-			cus=new Person();
-		
+		if(typeCustomer=="P") {
+			cus=new Person();		
 		}
 		else //company
 		{
@@ -85,12 +99,11 @@ public class MainController {
 		IEntry entry=new Entry();
 		entry.setAmmount(amount);
 		entry.setDate("2020-02-23");
-		entry.setName("deposit");
+		entry.setName(" deposit ");
 				
 		account.addEntry(entry);
 		
 		
-		System.out.println(Arrays.toString(bank.getAllEntries().toArray()));
 	
 	    ICustomer cus= bank.getCustomerByAccount(accoutnNumber);
 		notifies(cus," deposit "+ amount);
@@ -133,8 +146,6 @@ public class MainController {
 	
 	public Vector<Vector<String>> getDataVector() {
 		List<ICustomer> customers = bdb.getBank().getAllCustomers();
-		System.out.println("bank name: " + bdb.getBank().getName());
-		System.out.println("customers total: " + bdb.getBank().getAllCustomers().size());
 		return dataModel.getDataVector(customers, dataModel.defaultAccountFuntion());
 	}
 
@@ -145,6 +156,8 @@ public class MainController {
 	public void setDataModel(IDataModel dataModel) {
 		this.dataModel = dataModel;
 	}
+
+	
 
 
 	
