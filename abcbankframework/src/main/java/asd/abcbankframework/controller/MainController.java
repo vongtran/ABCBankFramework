@@ -53,6 +53,12 @@ public class MainController {
 			return;
 		}
 		
+		// check accountNumber
+		if(accountNumber=="") {
+			System.out.println("Please enter account number");
+			return;
+		}
+		
 		
 	   
 		ICustomer cus;
