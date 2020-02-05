@@ -72,7 +72,7 @@ public class Customer implements ICustomer {
 	}
 	@Override
 	public void sendEmail(String message) {
-		System.out.println("Email sent to: " + getName() + "Message" + message);
+		System.out.println(" Email sent to: " + getName() + " $$ message: " + message);
 	}
 
 	@Override

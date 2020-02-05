@@ -31,7 +31,7 @@ public class MainView extends JFrame {
         this.topPanelComponent = topComponent;
         this.rightPanelComponent = rightComponent;
         this.centerPanelComponent = centerComponent;
-        setTitle("Frame work");
+        setTitle("Framework");
         setDefaultCloseOperation(javax.swing.JFrame.DO_NOTHING_ON_CLOSE);
         getContentPane().setLayout(new BorderLayout(0,0));
         setSize(575,310);
