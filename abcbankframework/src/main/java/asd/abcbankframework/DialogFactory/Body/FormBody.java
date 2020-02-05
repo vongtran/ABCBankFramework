@@ -1,5 +1,9 @@
 package asd.abcbankframework.DialogFactory.Body;
 
+import asd.abcbankframework.DialogFactory.FormDialog;
+
+import java.awt.event.ActionListener;
+
 public class FormBody extends IDialogBody {
     javax.swing.JLabel JLabel1 = new javax.swing.JLabel();
     javax.swing.JLabel JLabel2 = new javax.swing.JLabel();
@@ -19,8 +23,10 @@ public class FormBody extends IDialogBody {
     javax.swing.JButton JButton_Cancel = new javax.swing.JButton();
     javax.swing.JLabel JLabel8 = new javax.swing.JLabel();
     javax.swing.JTextField JTextField_ACNR = new javax.swing.JTextField();
+    FormDialog formDialog;
 
-    public FormBody(){
+    public FormBody(FormDialog formDialog){
+        this.formDialog = formDialog;
         setLayout(null);
         JLabel1.setText("Name");
 
@@ -95,5 +101,21 @@ public class FormBody extends IDialogBody {
         add(JButton_Cancel);
         add(JLabel8);
         add(JTextField_ACNR);
+    }
+
+    public void setJButton_OKAction(ActionListener action) {
+        this.JButton_OK.addActionListener(action);
+    }
+    public void setJButton_Cancel(ActionListener action) {
+        this.JButton_Cancel.addActionListener(action);
+    }
+
+    public void setText(){
+        this.formDialog.setName(JTextField_NAME.getText());
+        this.formDialog.setCity(JTextField_CT.getText());
+        this.formDialog.setState(JTextField_ST.getText());
+        this.formDialog.setAccountnr(JTextField_ACNR.getText());
+        this.formDialog.setZip(JTextField_ZIP.getText());
+        this.formDialog.setStreet(JTextField_STR.getText());
     }
 }

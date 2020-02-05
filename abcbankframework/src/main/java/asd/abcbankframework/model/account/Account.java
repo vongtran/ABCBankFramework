@@ -4,12 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public  class Account implements IAccount {
-	private String accountNumber;
+	String accountNumber, clientName,street,city,zip,state,accountType,clientType,amountDeposit;
 	private List<IEntry> entries = new ArrayList<IEntry>();
 	
 	public Account() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+
+	public Account(String accountNumber,String clientName,String street,String city,String zip, String state,String accountType,String clientType,String amountDeposit){
+		this.accountNumber = accountNumber;
+		this.clientName = clientName;
+		this.street = street;
+		this.state = state;
+		this.city = city;
+		this.zip = zip;
+		this.accountType = accountType;
+		this.clientType = clientType;
+		this.amountDeposit = amountDeposit;
 	}
 	public Account(String accountNumber) {
 		super();

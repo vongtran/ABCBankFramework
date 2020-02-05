@@ -27,8 +27,17 @@ public class CenterPanelComponent extends JPanel {
         this.model = model;
     }
 
+    public int getSelection(){
+        return JTable1.getSelectionModel().getMinSelectionIndex();
+    }
+
+    public String getAccnr(){
+        return (String)model.getValueAt(this.getSelection(), 0);
+    }
+
     public void setRowData(Object[] rowData) {
         this.rowData = rowData;
     }
+    
 
 }

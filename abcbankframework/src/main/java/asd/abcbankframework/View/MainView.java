@@ -1,6 +1,8 @@
 package asd.abcbankframework.View;
 
+import asd.abcbankframework.DialogFactory.ActionDialog;
 import asd.abcbankframework.DialogFactory.DialogFactory;
+import asd.abcbankframework.DialogFactory.FormDialog;
 import asd.abcbankframework.DialogFactory.SimpleFactory;
 
 import javax.swing.*;
@@ -13,9 +15,6 @@ public class MainView extends JFrame {
     private CenterPanelComponent centerPanelComponent;
     private  RightPanelComponent rightPanelComponent;
     public   TopPanelComponent topPanelComponent;
-    private JScrollPane JScrollPane1;
-    private JTable JTable1;
-    private DefaultTableModel model;
 
 
     public MainView(CenterPanelComponent centerComponent, RightPanelComponent rightComponent, TopPanelComponent topComponent){
@@ -58,9 +57,36 @@ public class MainView extends JFrame {
     void JButtonPerAC_actionPerformed(java.awt.event.ActionEvent event)
     {
 
-        DialogFactory actionDialog = SimpleFactory.createDialog(this,"form",new OK(), new Cancel());
-        actionDialog.show();
+        FormDialog formDialog  = new FormDialog(this);
+        formDialog.setCancelAction(new OKCreateAccountPer(formDialog));
+        formDialog.setOKAction(new CancelCreateAccountPer());
+        formDialog.show();
     }
+
+    class OKCreateAccountPer implements java.awt.event.ActionListener
+    {
+        FormDialog formDialog;
+        public OKCreateAccountPer(FormDialog formDialog){
+          this.formDialog = formDialog;
+        }
+        public void actionPerformed(java.awt.event.ActionEvent event)
+        {
+            deposit(event);
+
+        }
+    }
+
+    class CancelCreateAccountPer implements java.awt.event.ActionListener
+    {
+        public void actionPerformed(java.awt.event.ActionEvent event)
+        {
+            deposit(event);
+
+        }
+    }
+
+
+
 
     class Deposit implements java.awt.event.ActionListener
     {
@@ -73,7 +99,11 @@ public class MainView extends JFrame {
 
     void deposit(java.awt.event.ActionEvent event)
     {
-        DialogFactory actionDialog = SimpleFactory.createDialog(this,"action",new OK(),new Cancel());
+        ActionDialog actionDialog = new ActionDialog(this);
+        actionDialog.setBodyCancelAction(new Cancel());
+        String selection = this.centerPanelComponent.getAccnr();
+        actionDialog.setText(selection);
+        actionDialog.setBodyOKAction(new OK(actionDialog,selection));
         actionDialog.show();
     }
 
@@ -88,21 +118,31 @@ public class MainView extends JFrame {
 
     void withdraw(java.awt.event.ActionEvent event)
     {
-        DialogFactory actionDialog = SimpleFactory.createDialog(this,"action",new OK(),new Cancel());
+        ActionDialog actionDialog = new ActionDialog(this);
+        String selection = this.centerPanelComponent.getAccnr();
+        actionDialog.setText(selection);
+        actionDialog.setBodyCancelAction(new OK(actionDialog,selection));
         actionDialog.show();
     }
 
     class OK implements java.awt.event.ActionListener
     {
+        ActionDialog value;
+        String Id;
+        public OK(ActionDialog value,String id){
+            this.value = value;
+            this.Id = id;
+        }
         public void actionPerformed(java.awt.event.ActionEvent event)
         {
-            System.out.println("OK");
+            System.out.println(this.value.getAmount());
 
         }
     }
 
     class Cancel implements java.awt.event.ActionListener
     {
+
         public void actionPerformed(java.awt.event.ActionEvent event)
         {
             System.out.println("Cancel");

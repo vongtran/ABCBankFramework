@@ -10,5 +10,5 @@ public abstract class DialogFactory extends JDialog {
         super(mainView);
     }
     abstract JPanel createHeader();
-    abstract JPanel createBody(ActionListener OKAction, ActionListener CancelAction);
+    abstract JPanel createBody();
 }

@@ -10,31 +10,45 @@ import java.awt.event.ActionListener;
 
 public class ActionDialog  extends DialogFactory {
     MainView mainView;
-    JPanel header ;
-    JPanel body ;
-    javax.swing.JLabel JLabel1 = new javax.swing.JLabel();
-    public ActionDialog(MainView parentFrame,ActionListener OKAction,ActionListener CancelAction){
+    ActionHeader header ;
+    ActionBody body ;
+    public ActionDialog(MainView parentFrame){
         super(parentFrame);
         this.mainView = parentFrame;
         setTitle("Deposit");
         setSize(268,150);
         setVisible(true);
         header = createHeader();
-        body = createBody(OKAction, CancelAction);
+        body = new ActionBody();
         getContentPane().add(header,BorderLayout.PAGE_START);
         getContentPane().add(body,BorderLayout.CENTER);
     }
 
     @Override
-    public JPanel createHeader() {
+    public ActionHeader createHeader() {
         return new ActionHeader();
     }
 
     @Override
-    public JPanel createBody(ActionListener OKAction,ActionListener CancelAction) {
-        return new ActionBody(OKAction, CancelAction);
+    public ActionBody createBody() {
+        return new ActionBody();
     }
 
+    public void setBodyOKAction(ActionListener action){
+        body.setJButton_OKAction(action);
+    }
+
+    public void setBodyCancelAction(ActionListener action){
+        body.setJButton_Cancel(action);
+    }
+
+    public String getAmount(){
+        return body.getJTextField_Deposit();
+    }
+
+    public void setText(String s){
+        body.setJTextField_NAME(s);
+    }
 
 
 }

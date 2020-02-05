@@ -12,7 +12,7 @@ public class ActionBody extends IDialogBody {
     javax.swing.JButton JButton_OK = new javax.swing.JButton();
     javax.swing.JButton JButton_Cancel = new javax.swing.JButton();
 
-    public ActionBody(ActionListener OKAction,ActionListener CancelAction){
+    public ActionBody(){
         setLayout(null);
         JLabel1.setText("Acc Nr");
         JLabel2.setText("Amount");
@@ -34,14 +34,23 @@ public class ActionBody extends IDialogBody {
         add(JTextField_Deposit);
         add(JButton_Cancel);
         add(JButton_OK);
-        JButton_OK.addActionListener(OKAction);
-        JButton_Cancel.addActionListener(CancelAction);
     }
 
     public void setJButton_OKAction(ActionListener action) {
         this.JButton_OK.addActionListener(action);
     }
 
+    public String getJTextField_NAME() {
+        return JTextField_NAME.getText();
+    }
+
+    public void setJTextField_NAME(String JTextField_NAME) {
+        this.JTextField_NAME.setText(JTextField_NAME);
+    }
+
+    public String getJTextField_Deposit() {
+        return JTextField_Deposit.getText();
+    }
 
     public void setJButton_Cancel(ActionListener action) {
         this.JButton_Cancel.addActionListener(action);

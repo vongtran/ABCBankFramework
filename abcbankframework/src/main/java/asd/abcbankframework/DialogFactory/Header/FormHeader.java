@@ -1,9 +1,14 @@
 package asd.abcbankframework.DialogFactory.Header;
 
+import asd.abcbankframework.DialogFactory.FormDialog;
+import asd.abcbankframework.model.account.Account;
+
 public class FormHeader extends IDialogHeader {
+    FormDialog formDialog;
     javax.swing.JRadioButton JRadioButton_Chk = new javax.swing.JRadioButton();
     javax.swing.JRadioButton JRadioButton_Sav = new javax.swing.JRadioButton();
-    public FormHeader(){
+    public FormHeader(FormDialog formDialog){
+        this.formDialog = formDialog;
         JRadioButton_Chk.setText("Checkings");
         JRadioButton_Chk.setActionCommand("Checkings");
         add(JRadioButton_Chk);
@@ -15,6 +20,14 @@ public class FormHeader extends IDialogHeader {
     }
     @Override
     void display() {
+
+    }
+
+    public void  setAccountType(){
+        if (JRadioButton_Chk.isSelected())
+            formDialog.setAccountType("Ch");
+        else
+            formDialog.setAccountType("S");
 
     }
 }

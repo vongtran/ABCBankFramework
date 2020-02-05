@@ -5,10 +5,10 @@ import asd.abcbankframework.View.MainView;
 import java.awt.event.ActionListener;
 
 public class SimpleFactory {
-    public static DialogFactory createDialog(MainView mainView, String s, ActionListener OKAction, ActionListener CancelAction){
+    public static DialogFactory createDialog(MainView mainView, String s){
         if(s.equals("form")){
-            return new FormDialog(mainView,OKAction,CancelAction);
+            return new FormDialog(mainView);
         }
-        return new ActionDialog(mainView,OKAction,CancelAction);
+        return new ActionDialog(mainView);
     }
 }
