@@ -35,11 +35,12 @@ public class MainView extends JFrame {
         getContentPane().setLayout(new BorderLayout(0,0));
         setSize(575,310);
         setVisible(false);
-        SymAction lSymAction = new SymAction();
+        PersonalAccount personalAccount = new PersonalAccount();
+        CompanyAccount companyAccount = new CompanyAccount();
         Deposit deposit = new Deposit();
         Withdraw withdraw = new Withdraw();
-        this.topPanelComponent.setJButton_CompACAction(lSymAction);
-        this.topPanelComponent.setJButton_PerACAction(lSymAction);
+        this.topPanelComponent.setJButton_CompACAction(companyAccount);
+        this.topPanelComponent.setJButton_PerACAction(personalAccount);
         add(this.topPanelComponent,BorderLayout.NORTH);
         this.topPanelComponent.setBounds(24,20,350,33);
         this.topPanelComponent.setLayout(new GridLayout(1, 2));
@@ -58,7 +59,7 @@ public class MainView extends JFrame {
     }
 
 
-    class SymAction implements java.awt.event.ActionListener
+    class PersonalAccount implements java.awt.event.ActionListener
     {
         public void actionPerformed(java.awt.event.ActionEvent event)
         {
@@ -67,10 +68,28 @@ public class MainView extends JFrame {
         }
     }
 
+    class CompanyAccount implements java.awt.event.ActionListener
+    {
+        public void actionPerformed(java.awt.event.ActionEvent event)
+        {
+            JButtonComAC_actionPerformed(event);
+
+        }
+    }
+
     void JButtonPerAC_actionPerformed(java.awt.event.ActionEvent event)
     {
 
-        FormDialog formDialog  = new FormDialog(this);
+        FormDialog formDialog  = new FormDialog(this,"P");
+        formDialog.setCancelAction(new CancelCreateAccountPer());
+        formDialog.setOKAction(new OKCreateAccountPer(formDialog));
+        formDialog.show();
+    }
+
+    void JButtonComAC_actionPerformed(java.awt.event.ActionEvent event)
+    {
+
+        FormDialog formDialog  = new FormDialog(this,"C");
         formDialog.setCancelAction(new CancelCreateAccountPer());
         formDialog.setOKAction(new OKCreateAccountPer(formDialog));
         formDialog.show();
@@ -79,6 +98,7 @@ public class MainView extends JFrame {
     class OKCreateAccountPer implements java.awt.event.ActionListener
     {
         FormDialog formDialog;
+        String accountType;
         public OKCreateAccountPer(FormDialog formDialog){
           this.formDialog = formDialog;
         }
@@ -202,6 +222,7 @@ public class MainView extends JFrame {
         }
         public void actionPerformed(java.awt.event.ActionEvent event)
         {
+
             System.out.println(this.value.getAmount());
 
             controller.withdraw(this.Id,Double.parseDouble(this.value.getAmount()));

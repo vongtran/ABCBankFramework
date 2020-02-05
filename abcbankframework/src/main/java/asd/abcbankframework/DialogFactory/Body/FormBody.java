@@ -23,13 +23,14 @@ public class FormBody extends IDialogBody {
     javax.swing.JButton JButton_Cancel = new javax.swing.JButton();
     javax.swing.JLabel JLabel8 = new javax.swing.JLabel();
     javax.swing.JTextField JTextField_ACNR = new javax.swing.JTextField();
+    javax.swing.JTextField JTextField_BD = new javax.swing.JTextField();
     FormDialog formDialog;
 
-    public FormBody(FormDialog formDialog){
+    public FormBody(FormDialog formDialog,String clientType){
         this.formDialog = formDialog;
         setLayout(null);
         JLabel1.setText("Name");
-
+        formDialog.setClientType(clientType);
         JLabel1.setForeground(java.awt.Color.black);
         JLabel1.setBounds(12,96,48,24);
         JLabel2.setText("Street");
@@ -47,10 +48,19 @@ public class FormBody extends IDialogBody {
 
         JLabel5.setForeground(java.awt.Color.black);
         JLabel5.setBounds(12,192,48,24);
-        JLabel6.setText("No of employees");
-
-        JLabel6.setForeground(java.awt.Color.black);
-        JLabel6.setBounds(12,216,96,24);
+        if(clientType.equals("P")){
+            JLabel6.setText("Birthdate");
+            JLabel6.setForeground(java.awt.Color.black);
+            JLabel6.setBounds(12,215,96,24);
+            JTextField_BD.setBounds(120,216,156,20);
+            add(JTextField_BD);
+        }else{
+            JLabel6.setText("No of employees");
+            JLabel6.setForeground(java.awt.Color.black);
+            JLabel6.setBounds(12,215,96,24);
+            JTextField_NoOfEmp.setBounds(120,216,156,20);
+            add(JTextField_NoOfEmp);
+        }
         JLabel7.setText("Email");
 
         JLabel7.setForeground(java.awt.Color.black);
@@ -66,7 +76,7 @@ public class FormBody extends IDialogBody {
 
         JTextField_ZIP.setBounds(120,192,156,20);
 
-        JTextField_NoOfEmp.setBounds(120,216,156,20);
+
 
         JTextField_EM.setBounds(120,240,156,20);
         JButton_OK.setText("OK");
@@ -95,7 +105,7 @@ public class FormBody extends IDialogBody {
         add(JTextField_ST);
         add(JTextField_STR);
         add(JTextField_ZIP);
-        add(JTextField_NoOfEmp);
+
         add(JTextField_EM);
         add(JButton_OK);
         add(JButton_Cancel);

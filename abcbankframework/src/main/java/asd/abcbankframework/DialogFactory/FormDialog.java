@@ -16,8 +16,9 @@ public class FormDialog extends DialogFactory {
     MainView mainView;
     FormHeader header ;
     FormBody body ;
-    public FormDialog(MainView mainView) {
+    public FormDialog(MainView mainView,String clientType) {
         super(mainView);
+        this.clientType = clientType;
         this.mainView = mainView;
         setTitle("Add compamy account");
         setSize(298,339);
@@ -36,7 +37,7 @@ public class FormDialog extends DialogFactory {
 
     @Override
     public FormBody createBody() {
-        return new FormBody(this);
+        return new FormBody(this,this.clientType);
     }
 
     public void setAccountnr(String accountnr) {
