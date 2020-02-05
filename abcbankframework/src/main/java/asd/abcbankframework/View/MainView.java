@@ -300,7 +300,7 @@ public class MainView extends JFrame {
         }
     }
     
-    private void refreshTable() {
+    public void refreshTable() {
     	 //refresh table
         Vector<Vector<String>> data = controller.getDataVector();                       
         model = new BankDataModel(data, controller.getColumnIdentifiers());
