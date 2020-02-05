@@ -6,6 +6,7 @@ import asd.abcbankframework.DialogFactory.FormDialog;
 import asd.abcbankframework.DialogFactory.SimpleFactory;
 import asd.abcbankframework.controller.MainController;
 import asd.bank.view.BankDataModel;
+import asd.bank.view.BankFrm;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -39,6 +40,7 @@ public class MainView extends JFrame {
         CompanyAccount companyAccount = new CompanyAccount();
         Deposit deposit = new Deposit();
         Withdraw withdraw = new Withdraw();
+
         this.topPanelComponent.setJButton_CompACAction(companyAccount);
         this.topPanelComponent.setJButton_PerACAction(personalAccount);
         add(this.topPanelComponent,BorderLayout.NORTH);
@@ -55,7 +57,43 @@ public class MainView extends JFrame {
         
         
         controller=new MainController();
+        SymWindow aSymWindow = new SymWindow();
+        addWindowListener(aSymWindow);
 
+    }
+
+    void exitApplication()
+    {
+        try {
+            this.setVisible(false);    // hide the Frame
+            this.dispose();            // free the system resources
+            System.exit(0);            // close the application
+        } catch (Exception e) {
+        }
+    }
+
+    class SymWindow extends java.awt.event.WindowAdapter
+    {
+        public void windowClosing(java.awt.event.WindowEvent event)
+        {
+            Object object = event.getSource();
+            if (object == MainView.this)
+                BankFrm_windowClosing(event);
+        }
+    }
+
+    void BankFrm_windowClosing(java.awt.event.WindowEvent event)
+    {
+        // to do: code goes here.
+
+        BankFrm_windowClosing_Interaction1(event);
+    }
+
+    void BankFrm_windowClosing_Interaction1(java.awt.event.WindowEvent event) {
+        try {
+            this.exitApplication();
+        } catch (Exception e) {
+        }
     }
 
 
@@ -116,6 +154,7 @@ public class MainView extends JFrame {
             centerPanelComponent.setTableModel(new BankDataModel(controller.getDataVector(), controller.getColumnIdentifiers()));
         
             refreshTable();
+            formDialog.dispose();
         
         }
     } 
@@ -127,7 +166,6 @@ public class MainView extends JFrame {
 
         }
     }
-    
     
     
     class CancelCreateAccountPer implements java.awt.event.ActionListener
