@@ -2,6 +2,7 @@ package asd.abcbankframework.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
@@ -17,9 +18,12 @@ import asd.abcbankframework.model.account.IEntry;
 import asd.abcbankframework.model.account.Savings;
 import asd.abcbankframework.model.bank.Bank;
 import asd.abcbankframework.model.bank.IBank;
+import asd.abcbankframework.model.customer.Customer;
 import asd.abcbankframework.model.customer.ICustomer;
 import asd.abcbankframework.model.customer.Organization;
 import asd.abcbankframework.model.customer.Person;
+import asd.abcbankframework.observer.ConcreteSubject;
+import asd.abcbankframework.observer.IObserver;
 
 public class MainController {
 	private IDataModel dataModel = new DefaultViewAccountModel();
@@ -36,9 +40,11 @@ public class MainController {
 			) {
 	   
 		ICustomer cus;
+	
 		//Create customer
 		if(typeCustomer=="person") {
 			cus=new Person();
+		
 		}
 		else //company
 		{
@@ -60,6 +66,9 @@ public class MainController {
 		
 		cus.addAccount(account);
 		bank.addCustomer(cus);
+				
+		//notifies		
+		 notifies(cus," Add account ");
 
 	}
 	
@@ -74,12 +83,15 @@ public class MainController {
 		IEntry entry=new Entry();
 		entry.setAmmount(amount);
 		entry.setDate("2020-02-23");
-		entry.setName("");
+		entry.setName("deposit");
 				
 		account.addEntry(entry);
 		
-	
 		
+		System.out.println(Arrays.toString(bank.getAllEntries().toArray()));
+	
+	    ICustomer cus= bank.getCustomerByAccount(accoutnNumber);
+		notifies(cus," deposit "+ amount);
 	}
 	
 	
@@ -97,10 +109,20 @@ public class MainController {
 		entry.setName("");
 				
 		account.addEntry(entry);
+		
+		
+		 ICustomer cus= bank.getCustomerByAccount(accoutnNumber);
+		 notifies(cus," Withdraw "+ amount);
 	}
 	
 	public void updateUI() {
 		
+	}
+	
+	public void notifies(IObserver cus, String message) {
+		ConcreteSubject con=new ConcreteSubject();
+		con.Attach(cus);
+		con.notifies(message);
 	}
 	
 	public Vector<String> getColumnIdentifiers() {

@@ -4,18 +4,25 @@ import asd.abcbankframework.DialogFactory.ActionDialog;
 import asd.abcbankframework.DialogFactory.DialogFactory;
 import asd.abcbankframework.DialogFactory.FormDialog;
 import asd.abcbankframework.DialogFactory.SimpleFactory;
+import asd.abcbankframework.controller.MainController;
+import asd.bank.view.BankDataModel;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 public class MainView extends JFrame {
 
-    private CenterPanelComponent centerPanelComponent;
+    protected CenterPanelComponent centerPanelComponent;
     private  RightPanelComponent rightPanelComponent;
     public   TopPanelComponent topPanelComponent;
+    private JScrollPane JScrollPane1;
+    private JTable JTable1;
+    private DefaultTableModel model;
 
+    MainController controller;
 
     public MainView(CenterPanelComponent centerComponent, RightPanelComponent rightComponent, TopPanelComponent topComponent){
         this.topPanelComponent = topComponent;
@@ -41,6 +48,9 @@ public class MainView extends JFrame {
         this.rightPanelComponent.setJButton_DepositAction(deposit);
         this.rightPanelComponent.setJButton_WithdrawAction(withdraw);
         add(this.centerPanelComponent,BorderLayout.WEST);
+        
+        
+        controller=new MainController();
 
     }
 
@@ -104,6 +114,7 @@ public class MainView extends JFrame {
         String selection = this.centerPanelComponent.getAccnr();
         actionDialog.setText(selection);
         actionDialog.setBodyOKAction(new OK(actionDialog,selection));
+
         actionDialog.show();
     }
 
@@ -125,6 +136,17 @@ public class MainView extends JFrame {
         actionDialog.show();
     }
 
+    class OKWithdraw implements java.awt.event.ActionListener
+    {
+        public void actionPerformed(java.awt.event.ActionEvent event)
+        {
+      
+            controller.withdraw("222", 123);
+           centerPanelComponent.setTableModel(new BankDataModel(controller.getDataVector(), controller.getColumnIdentifiers()));
+            
+        }
+    }
+    
     class OK implements java.awt.event.ActionListener
     {
         ActionDialog value;
@@ -137,6 +159,25 @@ public class MainView extends JFrame {
         {
             System.out.println(this.value.getAmount());
 
+            controller.withdraw(this.Id,123);
+
+        }
+    }
+    
+    
+    class OKDeposit implements java.awt.event.ActionListener
+    {
+        public void actionPerformed(java.awt.event.ActionEvent event)
+        {
+      
+            controller.deposit("222", 123);
+       
+            
+           //refresh table
+           Vector<Vector<String>> data = controller.getDataVector();                       
+           model = new BankDataModel(data, controller.getColumnIdentifiers());
+           JTable1 = new JTable(model);
+           centerPanelComponent.refreshTable(JTable1);
         }
     }
 

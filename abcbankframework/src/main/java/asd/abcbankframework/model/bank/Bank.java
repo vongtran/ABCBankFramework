@@ -65,5 +65,32 @@ public class Bank implements IBank {
 			return account.get(0);
 	}
 	
+	@Override
+	public ICustomer getCustomerByAccount(String number) {
+		// TODO Auto-generated method stub
+		for (ICustomer cus : customers) {
+			for (IAccount acc : cus.getAccounts()) {
+						if(acc.getAccountNumber()==number)
+							return cus;
+	    	}
+		}
+		return null;
+		
+		
+	}
+	@Override
+	public List<IEntry> getAllEntries() {
+		// TODO Auto-generated method stub
+		
+		List<IEntry> list=new ArrayList<IEntry>();
+		for (IAccount account : getAllAccounts()) {
+			for (IEntry entry : account.getEntries()) {
+				list.add(entry);
+				
+			}
+		}
+		return list;
+	}
+	
 	
 }

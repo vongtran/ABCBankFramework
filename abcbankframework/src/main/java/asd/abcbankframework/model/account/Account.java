@@ -40,4 +40,7 @@ public  class Account implements IAccount {
 		entries.add(entry);
 	}
 	
+	public List<IEntry> getEntries() {
+		return entries;
+	}
 }

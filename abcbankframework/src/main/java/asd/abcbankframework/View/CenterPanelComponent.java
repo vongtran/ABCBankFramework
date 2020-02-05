@@ -38,6 +38,14 @@ public class CenterPanelComponent extends JPanel {
     public void setRowData(Object[] rowData) {
         this.rowData = rowData;
     }
+
+    public JScrollPane getJScrollPane() {
+    	return JScrollPane1;
+    }
     
+    public void refreshTable(JTable JTable1) {
+    	 JScrollPane1.getViewport().removeAll();
+    	 JScrollPane1.getViewport().add(JTable1);
+    }
 
 }

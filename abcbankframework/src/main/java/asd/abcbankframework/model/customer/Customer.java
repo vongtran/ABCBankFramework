@@ -5,6 +5,8 @@ import java.util.List;
 
 import asd.abcbankframework.model.account.Account;
 import asd.abcbankframework.model.account.IAccount;
+import asd.abcbankframework.observer.IObserver;
+import asd.abcbankframework.observer.Subject;
 
 public class Customer implements ICustomer {
 	private String name;
@@ -69,8 +71,14 @@ public class Customer implements ICustomer {
 		
 	}
 	@Override
-	public void sendEmail() {
-		System.out.println("Email sent to: " + getName());
+	public void sendEmail(String message) {
+		System.out.println("Email sent to: " + getName() + "Message" + message);
+	}
+
+	@Override
+	public void update(String message) {
+		// TODO Auto-generated method stub
+		sendEmail(message);
 	}
 	
 
