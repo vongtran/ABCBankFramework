@@ -111,7 +111,7 @@ public class FormBody extends IDialogBody {
     }
 
     public void setText(){
-        this.formDialog.setName(JTextField_NAME.getText());
+        this.formDialog.setClientName(JTextField_NAME.getText());
         this.formDialog.setCity(JTextField_CT.getText());
         this.formDialog.setState(JTextField_ST.getText());
         this.formDialog.setAccountnr(JTextField_ACNR.getText());

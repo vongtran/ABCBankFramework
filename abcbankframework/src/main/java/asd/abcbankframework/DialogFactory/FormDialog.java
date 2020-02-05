@@ -59,6 +59,42 @@ public class FormDialog extends DialogFactory {
         this.zip = zip;
     }
 
+    public String getAccountnr() {
+        return accountnr;
+    }
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getZip() {
+        return zip;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public String getClientType() {
+        return clientType;
+    }
+
+    public String getAmountDeposit() {
+        return amountDeposit;
+    }
+
     public void setState(String state) {
         this.state = state;
     }
