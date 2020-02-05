@@ -68,8 +68,8 @@ public class MainView extends JFrame {
     {
 
         FormDialog formDialog  = new FormDialog(this);
-        formDialog.setCancelAction(new OKCreateAccountPer(formDialog));
-        formDialog.setOKAction(new CancelCreateAccountPer());
+        formDialog.setCancelAction(new CancelCreateAccountPer());
+        formDialog.setOKAction(new OKCreateAccountPer(formDialog));
         formDialog.show();
     }
 
@@ -81,8 +81,9 @@ public class MainView extends JFrame {
         }
         public void actionPerformed(java.awt.event.ActionEvent event)
         {
-            deposit(event);
-
+            formDialog.actionOk();
+            System.out.println(formDialog.getAccountType());
+            System.out.println(formDialog.getClientName());
         }
     }
 
@@ -159,7 +160,7 @@ public class MainView extends JFrame {
         {
             System.out.println(this.value.getAmount());
 
-            controller.withdraw(this.Id,123);
+            controller.withdraw(this.Id,Double.parseDouble(this.value.getAmount()));
 
         }
     }
