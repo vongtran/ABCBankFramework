@@ -54,7 +54,7 @@ public class MainController {
 		}
 		
 		// check accountNumber
-		if(accountNumber=="") {
+		if(accountNumber.isEmpty()) {
 			System.out.println("Please enter account number");
 			return;
 		}
