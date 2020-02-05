@@ -59,6 +59,12 @@ public class MainController {
 			return;
 		}
 		
+		// check name
+		if(name.isEmpty()) {
+			System.out.println("Please enter name");
+			return;
+		}
+		
 		
 	   
 		ICustomer cus;
