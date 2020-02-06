@@ -109,5 +109,6 @@ public class FormBody extends IDialogBody {
         this.formDialog.setZip(JTextField_ZIP.getText());
         this.formDialog.setStreet(JTextField_STR.getText());
         this.formDialog.setOther(JTextField_other.getText());
+        this.formDialog.setEmail(JTextField_EM.getText());
     }
 }

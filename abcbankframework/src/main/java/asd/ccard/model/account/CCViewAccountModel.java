@@ -19,8 +19,9 @@ public class CCViewAccountModel implements IDataModel{
 	private Vector<Vector<String>> dataVector;
 	public CCViewAccountModel() {
 		columnIdentifiers = new Vector<String>();
-		columnIdentifiers.add("Name");
 		columnIdentifiers.add("CC number");
+		columnIdentifiers.add("Name");
+		
 		columnIdentifiers.add("Exp date");
 		columnIdentifiers.add("Type");
 		columnIdentifiers.add("Balance");
@@ -47,20 +48,44 @@ public class CCViewAccountModel implements IDataModel{
 			for (ICustomer c : customers) {
 				for (IAccount a : c.getAccounts()) {
 					Vector<String> data = new Vector<String>();
-					data.add(c.getName());
 					data.add(a.getAccountNumber());
+					data.add(c.getName());
+					
 					String expDate = "";
-					if (c instanceof CCAccount) {
-						expDate = ((CCAccount) c).getExpireDate();
+					//if (c instanceof CCAccount) {
+					//	expDate = ((CCAccount) c).getExpireDate();
+					//}
+					
+	               if (a instanceof Gold) {
+						
+	            	   expDate = ((CCAccount)a).getExpireDate();
+					} else if (a instanceof Silver) {
+						expDate = ((CCAccount)a).getExpireDate();
+					} else if (a instanceof Bronze ) {
+						expDate = ((CCAccount)a).getExpireDate();
 					}
+					
+					
+					
 					data.add(expDate);
-					if (c instanceof Gold) {
+					
+					
+					
+					
+					
+					
+					
+					if (a instanceof Gold) {
+						
 						data.add("Gold");
-					} else if (c instanceof Silver) {
+					} else if (a instanceof Silver) {
 						data.add("Silver");
 					} else {
 						data.add("Bronze");
 					}
+					
+					
+				
 					data.add(String.valueOf(a.getBalance()));
 					result.add(data);
 				}

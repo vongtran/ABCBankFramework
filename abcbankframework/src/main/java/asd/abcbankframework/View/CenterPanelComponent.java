@@ -13,14 +13,19 @@ public class CenterPanelComponent extends JPanel {
     private JTable JTable1;
     private JScrollPane JScrollPane1;
     private Object[] rowData;
+    MainView view;
 
-
-    public CenterPanelComponent(Vector<Vector<String>> data,Vector<String> column){
+    public CenterPanelComponent(DefaultTableModel model){
         JScrollPane1 = new JScrollPane();
-        model = new BankDataModel(data, column);
+        this.model =model; // new BankDataModel(data, column);
         JTable1 = new JTable(model);
         add(JScrollPane1);
         JScrollPane1.getViewport().add(JTable1);
+      
+    }
+    
+    public void setView(MainView view ) {
+    	this.view = view;
     }
 
     public void setTableModel(DefaultTableModel model) {
@@ -36,7 +41,7 @@ public class CenterPanelComponent extends JPanel {
     	 if(this.getSelection()==-1)
     	  return "NaN";
          else
-         return (String)model.getValueAt(this.getSelection(), 0);
+         return (String)this.view.getModel().getValueAt(this.getSelection(), 0);
     }
 
     public void setRowData(Object[] rowData) {

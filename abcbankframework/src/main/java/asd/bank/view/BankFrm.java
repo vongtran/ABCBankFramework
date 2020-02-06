@@ -8,6 +8,8 @@ import asd.abcbankframework.View.TopPanelComponent;
 import asd.abcbankframework.controller.MainController;
 
 import java.awt.*;
+import java.util.Vector;
+
 import javax.swing.table.DefaultTableModel;
 import javax.swing.*;
 
@@ -24,9 +26,9 @@ public class BankFrm extends MainView
     BankController bankController;
 
     
-	public BankFrm(OwnHeaderComponent topPanelComponent,CenterPanelComponent centerPanelComponent,RightPanelComponent rightPanelComponent)
+	public BankFrm(OwnHeaderComponent topPanelComponent,CenterPanelComponent centerPanelComponent,RightPanelComponent rightPanelComponent, MainController controller)
 	{
-		super(centerPanelComponent,rightPanelComponent,topPanelComponent);
+		super(centerPanelComponent,rightPanelComponent,topPanelComponent, controller);
 		topPanelComponent.setJButton_AddInterest(new AddInterest());
 		bankController = new BankController();
 		setTitle("Bank");
@@ -57,7 +59,12 @@ public class BankFrm extends MainView
 		public void actionPerformed(java.awt.event.ActionEvent event)
 		{
 			bankController.addInterest(Double.parseDouble(interestDialog.getInterest()));
-			refreshTable();
+			
+			
+			centerPanelComponent.setTableModel(new BankDataModel(bankController.getDataVector(), bankController.getColumnIdentifiers()));
+            Vector<Vector<String>> data = bankController.getDataVector();                       
+ 			
+			refreshTable(new BankDataModel(data, bankController.getColumnIdentifiers()));
 			interestDialog.dispose();
 		}
 	}
@@ -102,8 +109,11 @@ public class BankFrm extends MainView
 			rightPanelComponent.setBounds(468,104,96,100);
 			rightPanelComponent.setLayout(new GridLayout(3, 1));
 			MainController  controller = new MainController();
-			CenterPanelComponent centerPanelComponent = new CenterPanelComponent(controller.getDataVector(), controller.getColumnIdentifiers());
-			(new BankFrm(headerButtonComponent,centerPanelComponent,rightPanelComponent)).setVisible(true);
+			CenterPanelComponent centerPanelComponent = new CenterPanelComponent( new BankDataModel(controller.getDataVector(), controller.getColumnIdentifiers()));
+			BankFrm view =(new BankFrm(headerButtonComponent,centerPanelComponent,rightPanelComponent, new BankController()));
+			view.setModel(new BankDataModel(controller.getDataVector(), controller.getColumnIdentifiers()));
+	        view.setVisible(true);
+            centerPanelComponent.setView(view);
 		} 
 		catch (Throwable t) {
 			t.printStackTrace();

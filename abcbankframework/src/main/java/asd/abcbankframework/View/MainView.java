@@ -22,12 +22,13 @@ public class MainView extends JFrame {
     private JTable JTable1;
     private DefaultTableModel model;
     protected  Withdraw withdraw;
+    protected Vector<Vector<String>> data;
     
     private ActionDialog actionDialog;
 
     MainController controller;
 
-    public MainView(CenterPanelComponent centerComponent, RightPanelComponent rightComponent, TopPanelComponent topComponent){
+    public MainView(CenterPanelComponent centerComponent, RightPanelComponent rightComponent, TopPanelComponent topComponent, MainController controller){
         this.topPanelComponent = topComponent;
         this.rightPanelComponent = rightComponent;
         this.centerPanelComponent = centerComponent;
@@ -56,7 +57,7 @@ public class MainView extends JFrame {
         add(this.centerPanelComponent,BorderLayout.WEST);
         
         
-        controller=new MainController();
+        this.controller=controller;
         SymWindow aSymWindow = new SymWindow();
         addWindowListener(aSymWindow);
 
@@ -149,11 +150,13 @@ public class MainView extends JFrame {
             controller.addAccount(formDialog.getClientName(), formDialog.getStreet(), formDialog.getCity()
             		, formDialog.getState(), formDialog.getZip(), formDialog.getName(), formDialog.getAccountType()
             		, formDialog.getClientType(), "20"
-            		, formDialog.getNumber());
+            		, formDialog.getNumber(),formDialog.getOther());
             
-            centerPanelComponent.setTableModel(new BankDataModel(controller.getDataVector(), controller.getColumnIdentifiers()));
-        
-            refreshTable();
+          centerPanelComponent.setTableModel( model);//new BankDataModel(controller.getDataVector(), controller.getColumnIdentifiers()));
+            Vector<Vector<String>> data = controller.getDataVector();                       
+           model = new BankDataModel(data, controller.getColumnIdentifiers());
+            refreshTable(model);
+          
             formDialog.dispose();
         
         }
@@ -251,8 +254,12 @@ public class MainView extends JFrame {
       
             controller.withdraw(this.Id, Double.parseDouble(this.value.getAmount()));
             actionDialog.dispose();
-            centerPanelComponent.setTableModel(new BankDataModel(controller.getDataVector(), controller.getColumnIdentifiers()));
-            refreshTable();
+            
+            
+         
+           Vector<Vector<String>> data = controller.getDataVector();                       
+            model = new BankDataModel(data, controller.getColumnIdentifiers());
+            refreshTable(model);
         }
     }
     
@@ -287,7 +294,11 @@ public class MainView extends JFrame {
       
             controller.deposit(this.Id, Double.parseDouble(this.value.getAmount()));
             actionDialog.dispose();
-            refreshTable();
+            
+            
+            Vector<Vector<String>> data = controller.getDataVector();                       
+            model = new BankDataModel(data, controller.getColumnIdentifiers());
+            refreshTable(model);
           
         }
     }
@@ -301,13 +312,25 @@ public class MainView extends JFrame {
         }
     }
     
-    public void refreshTable() {
+    public void refreshTable(DefaultTableModel model) {
     	 //refresh table
-        Vector<Vector<String>> data = controller.getDataVector();                       
-        model = new BankDataModel(data, controller.getColumnIdentifiers());
+       
         JTable1 = new JTable(model);
         centerPanelComponent.refreshTable(JTable1);
     }
+    
+    public void setModel(DefaultTableModel model) {
+    	this.model =model;
+    }
+    
+    public DefaultTableModel getModel() {
+    	return this.model ;
+    }
+    
+    
 
+    public void setVectorData(DefaultTableModel model) {
+    	this.model =model;
+    }
 
 }

@@ -19,11 +19,15 @@ import asd.abcbankframework.model.customer.Organization;
 import asd.abcbankframework.model.customer.Person;
 import asd.abcbankframework.observer.ConcreteSubject;
 import asd.abcbankframework.observer.IObserver;
+import asd.ccard.model.account.Bronze;
+import asd.ccard.model.account.CCAccount;
+import asd.ccard.model.account.Gold;
+import javafx.scene.control.Slider;
 
 
 public class MainController {
-	private IDataModel dataModel = new DefaultViewAccountModel();
-	private BankDB bdb = BankDB.getInstance();
+	protected IDataModel dataModel = new DefaultViewAccountModel();
+	protected BankDB bdb = BankDB.getInstance();
 	MainView mainView;
 
 
@@ -35,6 +39,7 @@ public class MainController {
 			, String state, String zip, String email, String typeAccount
 			, String typeCustomer, String noOfemployee
 			, String accountNumber
+			, String other
 			) {
 		
 		//Validation
@@ -78,11 +83,31 @@ public class MainController {
 		
 		
 		//Create acccount
-		IAccount account;		
+		IAccount account;	
+		CCAccount cAccount=null;
 		if(typeAccount=="Ch")
 		   account=new Checkings();
-		else //"saving"
+		else if(typeAccount=="S") //"saving"
 		   account=new Savings();
+		else if(typeAccount.equals("Gold") )//"Gold"
+		{
+			cAccount=new Gold();
+			 cAccount.setExpireDate(other);
+		}
+		else if(typeAccount.equals("Silver") )//"Gold"
+		{
+			cAccount=new asd.ccard.model.account.Silver();
+			 cAccount.setExpireDate(other);
+		}
+		else {
+			cAccount=new Bronze();
+			  cAccount.setExpireDate(other);
+		}
+		
+		
+		  
+		  account=cAccount;
+		
 		account.setAccountNumber(accountNumber);
 		
 		cus.addAccount(account);

@@ -13,7 +13,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class FormDialog extends DialogFactory {
-    String number, clientName,street,city,zip,state,accountType,clientType,amountDeposit,other;
+    String number, clientName,street,city,zip,state,accountType,clientType,amountDeposit,other,email;
     MainView mainView;
     FormHeader header ;
     public FormBody body ;
@@ -134,6 +134,14 @@ public class FormDialog extends DialogFactory {
 
     public void setCancelAction(ActionListener action){
         body.setJButton_Cancel(action);
+    }
+    
+    public void setEmail(String email) {
+    	this.email = email;
+    }
+    
+    public String getEmail() {
+    	return this.email;
     }
 
 

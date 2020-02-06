@@ -3,6 +3,8 @@ package asd.ccard.view;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
+import java.util.Vector;
+
 import javax.swing.table.DefaultTableModel;
 
 import asd.abcbankframework.DialogFactory.FormDialog;
@@ -14,8 +16,12 @@ import asd.abcbankframework.View.TopPanelComponent;
 import asd.abcbankframework.controller.MainController;
 import asd.bank.view.*;
 import asd.ccard.controller.CCController;
+import asd.ccard.model.account.CCViewAccountModel;
+import asd.ccard.model.account.CardDataModel;
 
 import javax.swing.*;
+
+
 
 /**
  * A basic JFC based application.
@@ -32,24 +38,27 @@ public class CardFrm  extends MainView
     private JScrollPane JScrollPane1;
     BankFrm myframe;
     private Object rowdata[];
+    
+    private static CenterPanelComponent centerPanelComponent;
 
-    BankController bankController;
+    CCController ccController;
     
     public void setTableModel(DefaultTableModel model) {
     	this.model = model;
     }
     
-	public CardFrm(TopPanelComponent topPanelComponent,CenterPanelComponent centerPanelComponent,RightPanelComponent rightPanelComponent)
+	public CardFrm(TopPanelComponent topPanelComponent,CenterPanelComponent centerPanelComponent,RightPanelComponent rightPanelComponent, MainController controller)
 	{
 		 
-		super(centerPanelComponent,rightPanelComponent,topPanelComponent);
+		super(centerPanelComponent,rightPanelComponent,topPanelComponent,controller);
 		setTitle("Credit Card");		
-		bankController = new BankController();
+		ccController = new CCController();
 		topPanelComponent.removeButton_CompACAction();
 		topPanelComponent.removeButton_PersonAction();
 		topPanelComponent.setJButton_CompACAction(new CreateCreditAccount());
 		topPanelComponent.setJButton_PerACAction(new GenerateBill());
-
+		centerPanelComponent.setTableModel(new CardDataModel(ccController.getDataVector(), ccController.getColumnIdentifiers()));
+		centerPanelComponent=centerPanelComponent;
 	}
 
 	class CreateCreditAccount implements java.awt.event.ActionListener
@@ -81,9 +90,18 @@ public class CardFrm  extends MainView
 		{
 
 			formDialog.actionOk();
-			System.out.println(formDialog.getNumber());
+			
+			ccController.addAccount(formDialog.getClientName(), formDialog.getStreet(), formDialog.getCity()
+            		, formDialog.getState(), formDialog.getZip(),formDialog.getEmail() , formDialog.getAccountType()
+            		, "CC", null
+            		, formDialog.getNumber(),formDialog.getOther());
 			System.out.println(formDialog.getAccountType());
-			System.out.println(formDialog.getCity());
+			 Vector<Vector<String>> data = ccController.getDataVector();                       
+	            model = new CardDataModel(data, ccController.getColumnIdentifiers());
+	            setModel(model);
+	            refreshTable(model);
+			
+			
 			formDialog.dispose();
 
 		}
@@ -128,6 +146,7 @@ public class CardFrm  extends MainView
 		}
 		public void actionPerformed(java.awt.event.ActionEvent event)
 		{
+			
 			billingDialog.dispose();
 
 		}
@@ -169,11 +188,16 @@ public class CardFrm  extends MainView
 			
 			//Center
 			CCController  controller = new CCController();
-			CenterPanelComponent centerPanelComponent = new CenterPanelComponent(controller.getDataVector(), controller.getColumnIdentifiers());
+			controller.setDataModel(new CCViewAccountModel());			
+			centerPanelComponent = new CenterPanelComponent( new CardDataModel(controller.getDataVector(), controller.getColumnIdentifiers()));
+		
 			
-			
-			(new CardFrm(headerButtonComponent,centerPanelComponent,rightPanelComponent)).setVisible(true);
+			CardFrm car =new CardFrm(headerButtonComponent,centerPanelComponent,rightPanelComponent, controller);
+			car.setModel(new CardDataModel(controller.getDataVector(), controller.getColumnIdentifiers()));
+			car.setVisible(true);
+			centerPanelComponent.setView(car);
 		} 
+		
 		catch (Throwable t) {
 			t.printStackTrace();
 			//Ensure the application exits with an error condition.

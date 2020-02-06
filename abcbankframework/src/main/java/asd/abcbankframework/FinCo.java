@@ -5,16 +5,20 @@ import asd.abcbankframework.View.MainView;
 import asd.abcbankframework.View.RightPanelComponent;
 import asd.abcbankframework.View.TopPanelComponent;
 import asd.abcbankframework.controller.MainController;
+import asd.bank.view.BankController;
+import asd.bank.view.BankDataModel;
 import asd.bank.view.BankFrm;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.TextField;
 
 /**
  * Hello world!
  *
  */
-public class App {
+public class FinCo {
     public static void main(String[] args) {
         {
             try {
@@ -30,8 +34,15 @@ public class App {
                 TopPanelComponent topPanelComponent = new TopPanelComponent();
                 RightPanelComponent rightPanelComponent = new RightPanelComponent();
                 MainController  controller = new MainController();
-                CenterPanelComponent centerPanelComponent = new CenterPanelComponent(controller.getDataVector(), controller.getColumnIdentifiers());
-                (new MainView(centerPanelComponent, rightPanelComponent, topPanelComponent)).setVisible(true);
+                
+              //  controller.getDataVector(), controller.getColumnIdentifiers(),
+                
+                CenterPanelComponent centerPanelComponent = new CenterPanelComponent( new DefaultTableModel(controller.getDataVector(),controller.getColumnIdentifiers()));
+                centerPanelComponent.setTableModel(new BankDataModel(controller.getDataVector(), controller.getColumnIdentifiers()));
+               MainView view= (new MainView(centerPanelComponent, rightPanelComponent, topPanelComponent,new BankController()));
+               view.setVisible(true);
+               centerPanelComponent.setView(view);
+               
             } catch (Throwable t) {
                 t.printStackTrace();
                 //Ensure the application exits with an error condition.
