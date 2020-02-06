@@ -5,16 +5,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import javax.swing.table.DefaultTableModel;
 
+import asd.abcbankframework.DialogFactory.FormDialog;
+import asd.abcbankframework.DialogFactory.SimpleFactory;
 import asd.abcbankframework.View.CenterPanelComponent;
 import asd.abcbankframework.View.MainView;
 import asd.abcbankframework.View.RightPanelComponent;
 import asd.abcbankframework.View.TopPanelComponent;
 import asd.abcbankframework.controller.MainController;
-import asd.bank.view.BankController;
-import asd.bank.view.BankFrm;
-import asd.bank.view.BankRightPannelComponent;
-import asd.bank.view.InterestDialog;
-import asd.bank.view.OwnHeaderComponent;
+import asd.bank.view.*;
 import asd.ccard.controller.CCController;
 
 import javax.swing.*;
@@ -41,43 +39,100 @@ public class CardFrm  extends MainView
     	this.model = model;
     }
     
-	public CardFrm(CardTopPannel topPanelComponent,CardCenterPanel centerPanelComponent,BankRightPannelComponent rightPanelComponent)
+	public CardFrm(TopPanelComponent topPanelComponent,CenterPanelComponent centerPanelComponent,RightPanelComponent rightPanelComponent)
 	{
 		 
 		super(centerPanelComponent,rightPanelComponent,topPanelComponent);
 		setTitle("Credit Card");		
 		bankController = new BankController();
-	    
+		topPanelComponent.removeButton_CompACAction();
+		topPanelComponent.removeButton_PersonAction();
+		topPanelComponent.setJButton_CompACAction(new CreateCreditAccount());
+		topPanelComponent.setJButton_PerACAction(new GenerateBill());
 
 	}
-	class AddInterest implements java.awt.event.ActionListener
+
+	class CreateCreditAccount implements java.awt.event.ActionListener
 	{
 		public void actionPerformed(java.awt.event.ActionEvent event)
 		{
-			JButtonInterest_actionPerformed(event);
+			JButton_actionPerformed(event);
 
 		}
 	}
 
-	void JButtonInterest_actionPerformed(java.awt.event.ActionEvent event)
+	void JButton_actionPerformed(java.awt.event.ActionEvent event)
 	{
-		InterestDialog interestDialog  = new InterestDialog(this);
-//		interestDialog.setBodyCancelAction(new MainView.CancelCreateAccountPer(formDialog));
-		interestDialog.setBodyOKAction(new OKCreateAccountPer(interestDialog));
-		interestDialog.show();
+
+		CreateCreditDialog formDialog  = new CreateCreditDialog(this,"CC");
+		formDialog.setTitle("Add Credit Card Account");
+		formDialog.setCancelAction(new CancelCreateCreditAccount(formDialog));
+		formDialog.setOKAction(new OKCreateCreditAccount(formDialog));
+		formDialog.show();
 	}
-	class OKCreateAccountPer implements java.awt.event.ActionListener
+
+	class OKCreateCreditAccount implements java.awt.event.ActionListener
 	{
-		InterestDialog interestDialog;
-		public OKCreateAccountPer(InterestDialog interestDialog){
-			this.interestDialog = interestDialog;
+		CreateCreditDialog formDialog;
+		public OKCreateCreditAccount(CreateCreditDialog formDialog){
+			this.formDialog = formDialog;
 		}
 		public void actionPerformed(java.awt.event.ActionEvent event)
 		{
-			bankController.addInterest(Double.parseDouble(interestDialog.getInterest()));
-			refreshTable();
+
+			formDialog.actionOk();
+			System.out.println(formDialog.getNumber());
+			System.out.println(formDialog.getAccountType());
+			System.out.println(formDialog.getCity());
+			formDialog.dispose();
+
 		}
 	}
+
+	class CancelCreateCreditAccount implements java.awt.event.ActionListener
+	{
+		FormDialog formDialog;
+		public CancelCreateCreditAccount(FormDialog formDialog){
+			this.formDialog = formDialog;
+		}
+		public void actionPerformed(java.awt.event.ActionEvent event)
+		{
+			formDialog.dispose();
+		}
+
+	}
+
+	class GenerateBill implements java.awt.event.ActionListener
+	{
+		public void actionPerformed(java.awt.event.ActionEvent event)
+		{
+			JButtonGenerateBill_actionPerformed(event);
+
+		}
+	}
+
+	void JButtonGenerateBill_actionPerformed(java.awt.event.ActionEvent event)
+	{
+
+		BillingDialog billingDialog  = new BillingDialog(this);
+		billingDialog.setTitle("Generate Billing");
+		billingDialog.setBodyOKAction(new OKGenerateBill(billingDialog));
+		billingDialog.show();
+	}
+
+	class OKGenerateBill implements java.awt.event.ActionListener
+	{
+		BillingDialog billingDialog;
+		public OKGenerateBill(BillingDialog billingDialog){
+			this.billingDialog = billingDialog;
+		}
+		public void actionPerformed(java.awt.event.ActionEvent event)
+		{
+			billingDialog.dispose();
+
+		}
+	}
+
 
 
 	/*****************************************************
@@ -98,22 +153,23 @@ public class CardFrm  extends MainView
 		    }
 
 		    //Top
-		    CardTopPannel headerButtonComponent = new CardTopPannel();
-			//headerButtonComponent.setJButton_CompACTittle("Add Credit-card account");
-			//headerButtonComponent.setJButton_PerACTittle("Generate Monthly bills");
+		    TopPanelComponent headerButtonComponent = new TopPanelComponent();
+			headerButtonComponent.setJButton_CompACTittle("Add Credit-card account");
+			headerButtonComponent.setJButton_PerACTittle("Generate Monthly bills");
+
 			headerButtonComponent.setBounds(24,20,350,33);
 			headerButtonComponent.setLayout(new GridLayout(1, 2));
 			
 
 			//Right
-			BankRightPannelComponent rightPanelComponent = new CardRightPanelComponent();
+			RightPanelComponent rightPanelComponent = new RightPanelComponent();
 			rightPanelComponent.setJButton_WithdrawTittle("Charge");
 			rightPanelComponent.setBounds(468,104,96,100);
 			rightPanelComponent.setLayout(new GridLayout(3, 1));
 			
 			//Center
 			CCController  controller = new CCController();
-			CardCenterPanel centerPanelComponent = new CardCenterPanel(controller.getDataVector(), controller.getColumnIdentifiers());
+			CenterPanelComponent centerPanelComponent = new CenterPanelComponent(controller.getDataVector(), controller.getColumnIdentifiers());
 			
 			
 			(new CardFrm(headerButtonComponent,centerPanelComponent,rightPanelComponent)).setVisible(true);

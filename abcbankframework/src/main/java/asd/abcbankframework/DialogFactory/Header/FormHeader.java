@@ -26,7 +26,7 @@ public class FormHeader extends IDialogHeader {
         JRadioButton_Sav.setBounds(36,36,84,24);
     }
     @Override
-    void display() {
+    public void display() {
 
     }
 

@@ -21,7 +21,7 @@ public class BankRightPannelComponent extends RightPanelComponent {
 	        setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 	       
 	        removeAll(); // remove component all in pannel
-	        add(JButton_Deposit);	        
+	        add(JButton_Deposit);
 	        add(JButton_Withdraw);
 	        add(JButton_Exit);
 	      

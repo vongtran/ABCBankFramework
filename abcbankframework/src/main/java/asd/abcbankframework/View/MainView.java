@@ -19,7 +19,6 @@ public class MainView extends JFrame {
     protected CenterPanelComponent centerPanelComponent;
     private  RightPanelComponent rightPanelComponent;
     public   TopPanelComponent topPanelComponent;
-    private JScrollPane JScrollPane1;
     private JTable JTable1;
     private DefaultTableModel model;
     protected  Withdraw withdraw;
@@ -40,7 +39,7 @@ public class MainView extends JFrame {
         PersonalAccount personalAccount = new PersonalAccount();
         CompanyAccount companyAccount = new CompanyAccount();
         Deposit deposit = new Deposit();
-        withdraw = new Withdraw();
+        Withdraw withdraw = new Withdraw();
 
         this.topPanelComponent.setJButton_CompACAction(companyAccount);
         this.topPanelComponent.setJButton_PerACAction(personalAccount);
@@ -52,7 +51,7 @@ public class MainView extends JFrame {
         this.rightPanelComponent.setBounds(468,104,96,100);
         this.rightPanelComponent.setLayout(new GridLayout(3, 1));
         this.rightPanelComponent.setJButton_DepositAction(deposit);
-       // this.rightPanelComponent.setJButton_WithdrawAction(withdraw);
+        this.rightPanelComponent.setJButton_WithdrawAction(withdraw);
         this.rightPanelComponent.setJButton_ExitAction(new Exit());
         add(this.centerPanelComponent,BorderLayout.WEST);
         
@@ -120,6 +119,7 @@ public class MainView extends JFrame {
     {
 
         FormDialog formDialog  = new FormDialog(this,"P");
+        formDialog.setTitle("Add Personal Account");
         formDialog.setCancelAction(new CancelCreateAccountPer(formDialog));
         formDialog.setOKAction(new OKCreateAccountPer(formDialog));
         formDialog.show();
@@ -149,7 +149,7 @@ public class MainView extends JFrame {
             controller.addAccount(formDialog.getClientName(), formDialog.getStreet(), formDialog.getCity()
             		, formDialog.getState(), formDialog.getZip(), formDialog.getName(), formDialog.getAccountType()
             		, formDialog.getClientType(), "20"
-            		, formDialog.getAccountnr());
+            		, formDialog.getNumber());
             
             centerPanelComponent.setTableModel(new BankDataModel(controller.getDataVector(), controller.getColumnIdentifiers()));
         
@@ -196,6 +196,7 @@ public class MainView extends JFrame {
     void deposit(java.awt.event.ActionEvent event)
     {
         actionDialog = new ActionDialog(this);
+        actionDialog.setDialogTitle("Deposit");
         actionDialog.setBodyCancelAction(new Cancel());
         String selection = this.centerPanelComponent.getAccnr();
         if(selection=="NaN")
@@ -206,7 +207,7 @@ public class MainView extends JFrame {
         
         actionDialog.setText(selection);
         actionDialog.setBodyOKAction(new OKDeposit(actionDialog,selection));
-
+        actionDialog.setBodyCancelAction(new Cancel());
         actionDialog.show();
     }
 
@@ -222,6 +223,7 @@ public class MainView extends JFrame {
     void withdraw(java.awt.event.ActionEvent event)
     {
         actionDialog = new ActionDialog(this);
+        actionDialog.setDialogTitle("Withdraw");
         String selection = this.centerPanelComponent.getAccnr();
         if(selection=="NaN")
         {
@@ -254,21 +256,21 @@ public class MainView extends JFrame {
         }
     }
     
-    class OK implements java.awt.event.ActionListener
-    {
-        ActionDialog value;
-        String Id;
-        public OK(ActionDialog value,String id){
-            this.value = value;
-            this.Id = id;
-        }
-        public void actionPerformed(java.awt.event.ActionEvent event)
-        {
-
-             controller.withdraw(this.Id,Double.parseDouble(this.value.getAmount()));
-
-        }
-    }
+//    class OK implements java.awt.event.ActionListener
+//    {
+//        ActionDialog value;
+//        String Id;
+//        public OK(ActionDialog value,String id){
+//            this.value = value;
+//            this.Id = id;
+//        }
+//        public void actionPerformed(java.awt.event.ActionEvent event)
+//        {
+//
+//             controller.withdraw(this.Id,Double.parseDouble(this.value.getAmount()));
+//
+//        }
+//    }
     
     
     class OKDeposit implements java.awt.event.ActionListener
@@ -295,9 +297,7 @@ public class MainView extends JFrame {
 
         public void actionPerformed(java.awt.event.ActionEvent event)
         {
-        
             actionDialog.dispose();
-
         }
     }
     

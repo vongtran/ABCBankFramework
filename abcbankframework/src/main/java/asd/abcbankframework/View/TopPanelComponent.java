@@ -10,7 +10,7 @@ public class TopPanelComponent extends JPanel {
     protected javax.swing.JButton JButton_CompAC = new javax.swing.JButton();
 
     public TopPanelComponent(){
-        JButton_PerAC.setText("Add Account");
+        JButton_PerAC.setText("Add Personal Account");
         JButton_CompAC.setText("Add Company Account");
         setLayout(new FlowLayout(FlowLayout.LEFT));
         add(JButton_CompAC);
@@ -35,6 +35,18 @@ public class TopPanelComponent extends JPanel {
 
     public void setJButton_CompACAction(ActionListener action) {
         this.JButton_CompAC.addActionListener(action);
+    }
+
+    public void removeButton_CompACAction(){
+        for (ActionListener al : this.JButton_CompAC.getActionListeners()) {
+            this.JButton_CompAC.removeActionListener(al);
+        }
+    }
+
+    public void removeButton_PersonAction(){
+        for (ActionListener al : this.JButton_PerAC.getActionListeners()) {
+            this.JButton_PerAC.removeActionListener(al);
+        }
     }
 
     public void addNewButton(JButton button){

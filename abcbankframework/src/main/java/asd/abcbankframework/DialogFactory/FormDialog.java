@@ -1,6 +1,7 @@
 package asd.abcbankframework.DialogFactory;
 
 import asd.abcbankframework.DialogFactory.Body.ActionBody;
+import asd.abcbankframework.DialogFactory.Body.CompanyForm;
 import asd.abcbankframework.DialogFactory.Body.FormBody;
 import asd.abcbankframework.DialogFactory.Header.ActionHeader;
 import asd.abcbankframework.DialogFactory.Header.FormHeader;
@@ -12,14 +13,16 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class FormDialog extends DialogFactory {
-    String accountnr, clientName,street,city,zip,state,accountType,clientType,amountDeposit;
+    String number, clientName,street,city,zip,state,accountType,clientType,amountDeposit,other;
     MainView mainView;
     FormHeader header ;
-    FormBody body ;
+    public FormBody body ;
+    SimpleFactory simpleFactory;
     public FormDialog(MainView mainView,String clientType) {
         super(mainView);
         this.clientType = clientType;
         this.mainView = mainView;
+        this.simpleFactory = simpleFactory;
         setTitle("Add compamy account");
         setSize(298,339);
         setVisible(true);
@@ -37,11 +40,11 @@ public class FormDialog extends DialogFactory {
 
     @Override
     public FormBody createBody() {
-        return new FormBody(this,this.clientType);
+        return SimpleFactory.createDialog(this,this.clientType);
     }
 
-    public void setAccountnr(String accountnr) {
-        this.accountnr = accountnr;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public void setClientName(String clientName) {
@@ -60,8 +63,8 @@ public class FormDialog extends DialogFactory {
         this.zip = zip;
     }
 
-    public String getAccountnr() {
-        return accountnr;
+    public String getNumber() {
+        return number;
     }
 
     public String getClientName() {
@@ -115,6 +118,14 @@ public class FormDialog extends DialogFactory {
     public void actionOk(){
         header.setAccountType();
         body.setText();
+    }
+
+    public String getOther() {
+        return other;
+    }
+
+    public void setOther(String other) {
+        this.other = other;
     }
 
     public void setOKAction(ActionListener action){

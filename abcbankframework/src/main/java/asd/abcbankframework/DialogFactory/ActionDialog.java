@@ -49,6 +49,7 @@ public class ActionDialog  extends DialogFactory {
     public void setText(String s){
         body.setJTextField_NAME(s);
     }
+    public void setDialogTitle(String s){setTitle(s);}
 
 
 }

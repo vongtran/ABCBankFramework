@@ -56,14 +56,8 @@ public class JDialog_AddCCAccount extends javax.swing.JDialog
 		getContentPane().add(JLabel5);
 		JLabel5.setForeground(java.awt.Color.black);
 		JLabel5.setBounds(12,204,48,24);
-		JLabel6.setText("CC number");
-		getContentPane().add(JLabel6);
-		JLabel6.setForeground(java.awt.Color.black);
-		JLabel6.setBounds(12,252,96,24);
-		Label7.setText("Exp. Date");
-		getContentPane().add(Label7);
-		Label7.setForeground(java.awt.Color.black);
-		Label7.setBounds(12,276,72,24);
+
+
 		getContentPane().add(JTextField_NAME);
 		JTextField_NAME.setBounds(84,108,156,20);
 		getContentPane().add(JTextField_CT);
@@ -74,10 +68,7 @@ public class JDialog_AddCCAccount extends javax.swing.JDialog
 		JTextField_STR.setBounds(84,132,156,20);
 		getContentPane().add(JTextField_ZIP);
 		JTextField_ZIP.setBounds(84,204,156,20);
-		getContentPane().add(JTextField_CCNR);
-		JTextField_CCNR.setBounds(84,252,156,20);
-		getContentPane().add(JTextField_ExpDate);
-		JTextField_ExpDate.setBounds(84,276,156,20);
+
 		JButton_OK.setText("OK");
 		JButton_OK.setActionCommand("OK");
 		getContentPane().add(JButton_OK);
@@ -127,8 +118,7 @@ public class JDialog_AddCCAccount extends javax.swing.JDialog
 	javax.swing.JTextField JTextField_ST = new javax.swing.JTextField();
 	javax.swing.JTextField JTextField_STR = new javax.swing.JTextField();
 	javax.swing.JTextField JTextField_ZIP = new javax.swing.JTextField();
-	javax.swing.JTextField JTextField_CCNR = new javax.swing.JTextField();
-	javax.swing.JTextField JTextField_ExpDate = new javax.swing.JTextField();
+
 	javax.swing.JButton JButton_OK = new javax.swing.JButton();
 	javax.swing.JButton JButton_Cancel = new javax.swing.JButton();
 	javax.swing.JRadioButton JRadioButton_Bronze = new javax.swing.JRadioButton();

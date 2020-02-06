@@ -12,15 +12,16 @@ public class CardTopPannel extends TopPanelComponent {
 
 	  
 	    javax.swing.JButton JButton_bill = new javax.swing.JButton();
+		javax.swing.JButton JButton_test = new javax.swing.JButton();
 
 	    public CardTopPannel(){
-	        JButton_PerAC.setText("Add credit-card");
+			JButton_test.setText("Add credit-card");
 	        JButton_bill.setText("Generate monthly bills");
 	        setLayout(new FlowLayout(FlowLayout.LEFT));
 	       // add(JButton_CompAC);
 	        removeAll(); // remove component all in pannel
 	              
-	        add(JButton_PerAC);
+	        add(JButton_test);
 	        add(JButton_bill);
 	    }
 
@@ -36,7 +37,7 @@ public class CardTopPannel extends TopPanelComponent {
 	    }
 
 	    public void setJButton_PerACAction(ActionListener action) {
-	        this.JButton_PerAC.addActionListener(action);
+	        this.JButton_test.addActionListener(action);
 	    }
 
 

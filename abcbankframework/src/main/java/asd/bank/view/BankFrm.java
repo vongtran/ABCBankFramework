@@ -24,7 +24,7 @@ public class BankFrm extends MainView
     BankController bankController;
 
     
-	public BankFrm(OwnHeaderComponent topPanelComponent,CenterPanelComponent centerPanelComponent,BankRightPannelComponent rightPanelComponent)
+	public BankFrm(OwnHeaderComponent topPanelComponent,CenterPanelComponent centerPanelComponent,RightPanelComponent rightPanelComponent)
 	{
 		super(centerPanelComponent,rightPanelComponent,topPanelComponent);
 		topPanelComponent.setJButton_AddInterest(new AddInterest());
@@ -98,7 +98,7 @@ public class BankFrm extends MainView
 			headerButtonComponent.setBounds(24,20,350,33);
 			headerButtonComponent.setLayout(new GridLayout(1, 2));
 
-			BankRightPannelComponent rightPanelComponent = new BankRightPannelComponent(); //new RightPanelComponent();
+			RightPanelComponent rightPanelComponent = new RightPanelComponent(); //new RightPanelComponent();
 			rightPanelComponent.setBounds(468,104,96,100);
 			rightPanelComponent.setLayout(new GridLayout(3, 1));
 			MainController  controller = new MainController();
