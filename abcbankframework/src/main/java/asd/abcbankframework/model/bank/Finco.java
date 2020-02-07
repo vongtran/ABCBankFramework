@@ -11,7 +11,7 @@ import asd.abcbankframework.model.account.IAccount;
 import asd.abcbankframework.model.account.IEntry;
 import asd.abcbankframework.model.customer.ICustomer;
 
-public class Bank implements IBank {
+public class Finco implements IFinco {
 	private String name;
 	private List<ICustomer> customers = new ArrayList<ICustomer>();
 	private List<IAccount> accounts = new ArrayList<IAccount>();

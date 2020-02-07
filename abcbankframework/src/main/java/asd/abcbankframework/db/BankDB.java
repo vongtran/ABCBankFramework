@@ -6,17 +6,17 @@ import asd.abcbankframework.model.account.Entry;
 import asd.abcbankframework.model.account.IAccount;
 import asd.abcbankframework.model.account.IEntry;
 import asd.abcbankframework.model.account.Savings;
-import asd.abcbankframework.model.bank.Bank;
-import asd.abcbankframework.model.bank.IBank;
+import asd.abcbankframework.model.bank.Finco;
+import asd.abcbankframework.model.bank.IFinco;
 import asd.abcbankframework.model.customer.ICustomer;
 import asd.abcbankframework.model.customer.Organization;
 import asd.abcbankframework.model.customer.Person;
 
 public class BankDB {
 	private static BankDB instance = new BankDB();
-	private IBank bank;
+	private IFinco bank;
 	private BankDB() {
-		bank = new Bank();
+		bank = new Finco();
 		bank.setName("MIU Bank");
 		
 		
@@ -64,10 +64,10 @@ public class BankDB {
 	public static BankDB getInstance() {
 		return instance;
 	}
-	public IBank getBank() {
+	public IFinco getBank() {
 		return this.bank;
 	}
-	public void setBank(IBank bank) {
+	public void setBank(IFinco bank) {
 		this.bank = bank;
 	} 
 	

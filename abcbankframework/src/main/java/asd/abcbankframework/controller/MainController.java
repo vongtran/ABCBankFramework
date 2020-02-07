@@ -13,7 +13,7 @@ import asd.abcbankframework.model.account.IAccount;
 import asd.abcbankframework.model.account.IDataModel;
 import asd.abcbankframework.model.account.IEntry;
 import asd.abcbankframework.model.account.Savings;
-import asd.abcbankframework.model.bank.IBank;
+import asd.abcbankframework.model.bank.IFinco;
 import asd.abcbankframework.model.customer.ICustomer;
 import asd.abcbankframework.model.customer.Organization;
 import asd.abcbankframework.model.customer.Person;
@@ -22,7 +22,7 @@ import asd.abcbankframework.observer.IObserver;
 import asd.ccard.model.account.Bronze;
 import asd.ccard.model.account.CCAccount;
 import asd.ccard.model.account.Gold;
-import javafx.scene.control.Slider;
+//import javafx.scene.control.Slider;
 
 
 public class MainController {
@@ -31,7 +31,7 @@ public class MainController {
 	MainView mainView;
 
 
-	protected IBank bank = BankDB.getInstance().getBank();
+	protected IFinco bank = BankDB.getInstance().getBank();
 	
 
 	
