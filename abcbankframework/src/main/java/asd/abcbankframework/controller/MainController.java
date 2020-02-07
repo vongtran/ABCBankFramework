@@ -43,54 +43,16 @@ public class MainController {
 			) {
 		
 		//Validation
+		boolean validData = validateData(accountNumber, name);
 		
-		List<IAccount> accounts = bank.getAllAccounts().stream().filter(x->x.getAccountNumber().equals(accountNumber)).collect(Collectors.toList());
-		if(accounts.size()>0)
-		{
-			System.out.println("This account exist");
+		if (!validData) {
 			return;
 		}
 		
-		// check accountNumber
-		if(accountNumber.isEmpty()) {
-			System.out.println("Please enter account number");
-			return;
-		}
-		
-		// check name
-		if(name.isEmpty()) {
-			System.out.println("Please enter name");
-			return;
-		}
-		
-		
-	   
-		ICustomer cus;
-	
-		//Create customer
-		if(typeCustomer=="P") {
-			cus=new Person();		
-		}
-		else //company
-		{
-			cus=new Organization();
-			
-		}
-		cus.setName(name);
-		cus.setStreet(street);
-		cus.setCity(city);
-		cus.setState(state);
-		
+		ICustomer cus = createCustomer(typeCustomer, name, street, city, state);
 		
 		//Create acccount
-		IAccount account;	
-		
-		if(typeAccount=="Ch")
-		   account=new Checkings();
-		else //(typeAccount=="S") //"saving"
-		   account=new Savings();
-				
-		account.setAccountNumber(accountNumber);
+		IAccount account = createAccount(typeAccount, accountNumber);
 		
 		cus.addAccount(account);
 		bank.addCustomer(cus);
@@ -169,8 +131,57 @@ public class MainController {
 		this.dataModel = dataModel;
 	}
 
+	public boolean validateData(String accountNumber, String name) {
+		List<IAccount> accounts = bank.getAllAccounts().stream().filter(x->x.getAccountNumber().equals(accountNumber)).collect(Collectors.toList());
+		if(accounts.size()>0)
+		{
+			System.out.println("This account exist");
+			return false;
+		}
+		
+		// check accountNumber
+		if(accountNumber.isEmpty()) {
+			System.out.println("Please enter account number");
+			return false;
+		}
+		
+		// check name
+		if(name.isEmpty()) {
+			System.out.println("Please enter name");
+			return false;
+		}
+		return true;
+	}
+
+	public ICustomer createCustomer(String typeCustomer, String name, String street, String city, String state) {
+		ICustomer cus;
+		
+		//Create customer
+		if(typeCustomer=="P") {
+			cus=new Person();		
+		}
+		else //company
+		{
+			cus=new Organization();
+			
+		}
+		cus.setName(name);
+		cus.setStreet(street);
+		cus.setCity(city);
+		cus.setState(state);
+		return cus;
+	}
 	
-
-
+	public IAccount createAccount(String typeAccount, String accountNumber, String... others) {
+		IAccount account;	
+		
+		if(typeAccount=="Ch")
+		   account=new Checkings();
+		else //(typeAccount=="S") //"saving"
+		   account=new Savings();
+				
+		account.setAccountNumber(accountNumber);
+		return account;
+	}
 	
 }
