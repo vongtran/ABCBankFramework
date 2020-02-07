@@ -9,7 +9,7 @@ import java.util.function.Function;
 
 import asd.abcbankframework.model.account.IAccount;
 import asd.abcbankframework.model.account.IDataModel;
-import asd.abcbankframework.model.bank.IBank;
+import asd.abcbankframework.model.bank.IFinco;
 import asd.abcbankframework.model.customer.Customer;
 import asd.abcbankframework.model.customer.ICustomer;
 import asd.abcbankframework.model.customer.Person;

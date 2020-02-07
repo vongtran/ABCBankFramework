@@ -7,7 +7,7 @@ import asd.abcbankframework.model.account.IAccount;
 import asd.abcbankframework.model.account.IEntry;
 import asd.abcbankframework.model.customer.ICustomer;
 
-public interface IBank {
+public interface IFinco {
 	public void addCustomer(ICustomer customer);
 	public void removeCustomer(ICustomer customer);
 	public List<ICustomer> getAllCustomers();

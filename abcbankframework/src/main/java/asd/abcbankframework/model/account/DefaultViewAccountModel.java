@@ -7,7 +7,7 @@ import java.util.Vector;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import asd.abcbankframework.model.bank.IBank;
+import asd.abcbankframework.model.bank.IFinco;
 import asd.abcbankframework.model.customer.Customer;
 import asd.abcbankframework.model.customer.ICustomer;
 import asd.abcbankframework.model.customer.Person;
