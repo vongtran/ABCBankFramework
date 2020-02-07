@@ -87,40 +87,6 @@ public class BankFrm extends MainView
 	 * Sets the Look and Feel to the System Look and Feel.
 	 * Creates a new JFrame1 and makes it visible.
 	 *****************************************************/
-	static public void main(String args[])
-	{
-		try {
-		    // Add the following code if you want the Look and Feel
-		    // to be set to the Look and Feel of the native system.
-		    
-		    try {
-		        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		    } 
-		    catch (Exception e) { 
-		    }
-
-			OwnHeaderComponent headerButtonComponent = new OwnHeaderComponent();
-			headerButtonComponent.setJButton_CompACTittle("Add Company Account");
-			headerButtonComponent.setJButton_PerACTittle("Add Personal Account");
-			headerButtonComponent.setBounds(24,20,350,33);
-			headerButtonComponent.setLayout(new GridLayout(1, 2));
-
-			RightPanelComponent rightPanelComponent = new RightPanelComponent(); //new RightPanelComponent();
-			rightPanelComponent.setBounds(468,104,96,100);
-			rightPanelComponent.setLayout(new GridLayout(3, 1));
-			MainController  controller = new MainController();
-			CenterPanelComponent centerPanelComponent = new CenterPanelComponent( new BankDataModel(controller.getDataVector(), controller.getColumnIdentifiers()));
-			BankFrm view =(new BankFrm(headerButtonComponent,centerPanelComponent,rightPanelComponent, new BankController()));
-			view.setModel(new BankDataModel(controller.getDataVector(), controller.getColumnIdentifiers()));
-	        view.setVisible(true);
-            centerPanelComponent.setView(view);
-		} 
-		catch (Throwable t) {
-			t.printStackTrace();
-			//Ensure the application exits with an error condition.
-			System.exit(1);
-		}
-	}
 }
 
 

@@ -44,7 +44,10 @@ public class BankCo {
 			rightPanelComponent.setLayout(new GridLayout(3, 1));
 			MainController  controller = new MainController();
 			CenterPanelComponent centerPanelComponent = new CenterPanelComponent( new BankDataModel(controller.getDataVector(), controller.getColumnIdentifiers()));
-			(new BankFrm(headerButtonComponent,centerPanelComponent,rightPanelComponent, new BankController())).setVisible(true);
+			BankFrm view =(new BankFrm(headerButtonComponent,centerPanelComponent,rightPanelComponent, new BankController()));
+			view.setModel(new BankDataModel(controller.getDataVector(), controller.getColumnIdentifiers()));
+			view.setVisible(true);
+			centerPanelComponent.setView(view);
 		} 
 		catch (Throwable t) {
 			t.printStackTrace();

@@ -54,9 +54,11 @@ public class CreditCardCo {
 			CCController  controller = new CCController();
 			controller.setDataModel(new CCViewAccountModel());			
 			CenterPanelComponent centerPanelComponent = new CenterPanelComponent( new CardDataModel(controller.getDataVector(), controller.getColumnIdentifiers()));
-		
-			
-			(new CardFrm(headerButtonComponent,centerPanelComponent,rightPanelComponent, controller)).setVisible(true);
+
+			CardFrm car =new CardFrm(headerButtonComponent,centerPanelComponent,rightPanelComponent, controller);
+			car.setModel(new CardDataModel(controller.getDataVector(), controller.getColumnIdentifiers()));
+			car.setVisible(true);
+			centerPanelComponent.setView(car);
 		} 
 		catch (Throwable t) {
 			t.printStackTrace();
