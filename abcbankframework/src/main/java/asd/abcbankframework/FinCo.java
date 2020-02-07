@@ -41,7 +41,10 @@ public class FinCo {
                 centerPanelComponent.setTableModel(new BankDataModel(controller.getDataVector(), controller.getColumnIdentifiers()));
                MainView view= (new MainView(centerPanelComponent, rightPanelComponent, topPanelComponent,new BankController()));
                view.setVisible(true);
+               view.setModel( new DefaultTableModel(controller.getDataVector(),controller.getColumnIdentifiers()));
                centerPanelComponent.setView(view);
+               
+               
                
             } catch (Throwable t) {
                 t.printStackTrace();
