@@ -84,30 +84,12 @@ public class MainController {
 		
 		//Create acccount
 		IAccount account;	
-		CCAccount cAccount=null;
+		
 		if(typeAccount=="Ch")
 		   account=new Checkings();
-		else if(typeAccount=="S") //"saving"
+		else //(typeAccount=="S") //"saving"
 		   account=new Savings();
-		else if(typeAccount.equals("Gold") )//"Gold"
-		{
-			cAccount=new Gold();
-			 cAccount.setExpireDate(other);
-		}
-		else if(typeAccount.equals("Silver") )//"Gold"
-		{
-			cAccount=new asd.ccard.model.account.Silver();
-			 cAccount.setExpireDate(other);
-		}
-		else {
-			cAccount=new Bronze();
-			  cAccount.setExpireDate(other);
-		}
-		
-		
-		  
-		  account=cAccount;
-		
+				
 		account.setAccountNumber(accountNumber);
 		
 		cus.addAccount(account);

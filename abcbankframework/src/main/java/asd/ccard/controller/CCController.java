@@ -19,7 +19,11 @@ public class CCController extends MainController {
 	@Override
 	public void addAccount(String name, String street, String city, String state, String zip, String email,
 			String typeAccount, String typeCustomer, String noOfemployee, String accountNumber,String other) {
+	
+		
 		super.addAccount(name, street, city, state, zip, email, typeAccount, typeCustomer, noOfemployee, accountNumber,other);
+	
+	
 	}
 	
 	public StringBuilder generateMonthlyBilling() {
